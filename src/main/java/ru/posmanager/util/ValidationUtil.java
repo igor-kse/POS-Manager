@@ -10,7 +10,7 @@ public class ValidationUtil {
 
     public static void checkNew(HasId bean) {
         if (bean.getId() != null) {
-            throw new IllegalArgumentException(bean.getClass().getSimpleName()+ ": the id must be null!");
+            throw new IllegalArgumentException(bean.getClass().getSimpleName() + ": the id must be null!");
         }
     }
 
@@ -22,23 +22,14 @@ public class ValidationUtil {
         }
     }
 
-    public static  <T> T checkNotFound(T object, String message) {
-        checkNotFound(object != null, message);
-        return object;
-    }
-
-    public static void checkNotFound(boolean found, String message) {
-        if (!found) {
-            throw new NotFoundException(message);
-        }
-    }
-
-    public static HasId checkNotFoundWithId(HasId bean, int id) {
-        checkNotFound(bean != null, "id = " + id);
+    public static HasId checkNotFoundWithId(HasId bean, Class<?> clazz, int id) {
+        checkNotFoundWithId(bean != null, clazz, id);
         return bean;
     }
 
-    public static void checkNotFoundWithId(boolean found, int id) {
-        checkNotFound(found, "id = " + id);
+    public static void checkNotFoundWithId(boolean found, Class<?> clazz, int id) {
+        if (!found) {
+            throw new NotFoundException(clazz, id);
+        }
     }
 }
