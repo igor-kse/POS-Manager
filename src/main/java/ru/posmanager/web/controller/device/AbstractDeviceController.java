@@ -1,0 +1,43 @@
+package ru.posmanager.web.controller.device;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.posmanager.service.device.DeviceService;
+import ru.posmanager.to.device.DeviceDTO;
+import ru.posmanager.to.device.DeviceUpdateDTO;
+
+import java.util.List;
+
+public abstract class AbstractDeviceController {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final DeviceService service;
+
+    public AbstractDeviceController(DeviceService service) {
+        this.service = service;
+    }
+
+    public DeviceDTO create(DeviceUpdateDTO dto) {
+        log.info("creating DeviceDTO from {}", dto);
+        return service.create(dto);
+    }
+
+    public DeviceDTO get(int id) {
+        log.info("getting DeviceDTO with id {}", id);
+        return service.get(id);
+    }
+
+    public List<DeviceDTO> getAll() {
+        log.info("getting all DeviceDTO");
+        return service.getAll();
+    }
+
+    public void update(DeviceUpdateDTO dto, int id) {
+        log.info("updating DeviceDTO {} with {}", id, dto);
+        service.update(dto, id);
+    }
+
+    public void delete(int id) {
+        log.info("deleting DeviceDTO with id {}", id);
+        service.delete(id);
+    }
+}
