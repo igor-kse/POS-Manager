@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/posmanager
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.jdbc.batch_size: 10
+      hibernate.use_sql_comments: true
+      hibernate.jpa.compliance.proxy: true
+      hibernate.cache.use_query_cache: false
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.region.factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+      hibernate.javax.cache.provider: org.ehcache.jsr107.EhcacheCachingProvider
+  sql:
+    init:
+      mode: always
+      encoding: utf-8
