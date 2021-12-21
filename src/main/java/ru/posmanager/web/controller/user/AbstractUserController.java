@@ -40,6 +40,12 @@ public abstract class AbstractUserController {
         return service.getAll();
     }
 
+    public List<UserPreviewDTO> getAllFilteredUserPreviewDTO(String lastName, String firstName, String middleName) {
+        String message = "getting all UserPreviewDTO filtered by lastName={}, firstName={}, middleName={}";
+        log.info(message, lastName, firstName, middleName);
+        return service.getAllFilteredUserPreviewDTO(lastName, firstName, middleName);
+    }
+
     public void update(Map<String, Object> updates, int id, String... fields) {
         Map<String, Object> patch = new HashMap<>();
         CollectionUtil.addAllIfNotEmpty(updates, patch, fields);

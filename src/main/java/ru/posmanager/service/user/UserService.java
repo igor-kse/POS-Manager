@@ -18,7 +18,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static ru.posmanager.util.ValidationUtil.*;
+import static ru.posmanager.util.StringUtil.emptyStringIfNull;
+import static ru.posmanager.util.ValidationUtil.checkNew;
+import static ru.posmanager.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class UserService implements AuthorizedUserDetailsService {
@@ -59,6 +61,13 @@ public class UserService implements AuthorizedUserDetailsService {
 
     public List<UserPreviewDTO> getAllUserPreviewDTO() {
         List<User> users = userRepository.getAll();
+        return users != null ? userMapper.toUserPreviewDTO(users) : Collections.emptyList();
+    }
+
+    public List<UserPreviewDTO> getAllFilteredUserPreviewDTO(String lastName, String firstName, String middleName) {
+        List<User> users = userRepository.getAllFilteredByName(
+                emptyStringIfNull(lastName), emptyStringIfNull(firstName), emptyStringIfNull(middleName)
+        );
         return users != null ? userMapper.toUserPreviewDTO(users) : Collections.emptyList();
     }
 

@@ -26,6 +26,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u FROM User u ORDER BY u.email")
     List<User> getAll();
 
+    @Query("SELECT u FROM User u " +
+            "WHERE u.lastName LIKE :last_name% AND u.firstName LIKE :first_name% AND u.middleName LIKE :middle_name%")
+    List<User> getAllFilteredByName(@Param("last_name") String lastName, @Param("first_name") String firstName,
+                                    @Param("middle_name") String middleName);
+
     User getByEmail(String email);
 
     @Modifying

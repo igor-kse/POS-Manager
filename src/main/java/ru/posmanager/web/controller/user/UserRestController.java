@@ -39,6 +39,15 @@ public class UserRestController extends AbstractUserController {
         return super.getAllUserPreviewDTO();
     }
 
+    @Override
+    @GetMapping("/filter")
+    public List<UserPreviewDTO> getAllFilteredUserPreviewDTO(
+            @RequestParam(value = "last_name", required = false) String lastName,
+            @RequestParam(value = "first_name", required = false) String firstName,
+            @RequestParam(value = "middle_name", required = false) String middleName) {
+        return super.getAllFilteredUserPreviewDTO(lastName, firstName, middleName);
+    }
+
     @PatchMapping(value = "/profile", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Map<String, Object> updates) {
