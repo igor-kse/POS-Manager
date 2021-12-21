@@ -22,5 +22,8 @@ public interface VendorRepository extends JpaRepository<Vendor, Integer> {
     @Query("SELECT v FROM Vendor v ORDER BY v.name")
     List<Vendor> getAll();
 
+    @Query("SELECT v FROM Vendor v WHERE v.name LIKE :vendor_name%")
+    List<Vendor> getAllFilteredByName(@Param("vendor_name") String vendorName);
+
     Vendor getByName(String name);
 }

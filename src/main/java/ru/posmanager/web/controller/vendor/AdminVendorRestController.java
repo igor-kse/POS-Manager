@@ -44,6 +44,12 @@ public class AdminVendorRestController extends AbstractVendorController {
     }
 
     @Override
+    @GetMapping("/filter")
+    public List<VendorDTO> getAllFilteredByName(@RequestParam(value = "name", required = false) String name) {
+        return super.getAllFilteredByName(name);
+    }
+
+    @Override
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody VendorDTO to, @PathVariable int id) {

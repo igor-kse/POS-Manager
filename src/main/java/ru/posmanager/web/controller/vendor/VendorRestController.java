@@ -1,10 +1,7 @@
 package ru.posmanager.web.controller.vendor;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.posmanager.service.device.VendorService;
 import ru.posmanager.to.device.VendorDTO;
 
@@ -29,5 +26,11 @@ public class VendorRestController extends AbstractVendorController {
     @GetMapping
     public List<VendorDTO> getAll() {
         return super.getAll();
+    }
+
+    @Override
+    @GetMapping("/filter")
+    public List<VendorDTO> getAllFilteredByName(@RequestParam(value = "name", required = false) String name) {
+        return super.getAllFilteredByName(name);
     }
 }
