@@ -44,6 +44,17 @@ public class RequestRestController extends AbstractRequestController {
         return super.get(id);
     }
 
+    @GetMapping
+    public List<RequestPreviewDTO> getAllPreview() {
+        return super.getAllPreview();
+    }
+
+    @GetMapping("/filter")
+    public List<RequestPreviewDTO> getAllFiltered(@RequestParam(value = "title", required = false) String title,
+                                                  @RequestParam(value = "status", required = false) String requestStatus) {
+        return super.getAllFiltered(title, requestStatus);
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody RequestUpdateDTO dto, @PathVariable int id) {
@@ -56,8 +67,5 @@ public class RequestRestController extends AbstractRequestController {
         }
     }
 
-    @GetMapping
-    public List<RequestPreviewDTO> getAllPreview() {
-        return super.getAllPreview();
-    }
+
 }

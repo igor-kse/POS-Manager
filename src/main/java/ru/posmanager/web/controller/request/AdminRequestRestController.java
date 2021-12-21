@@ -49,6 +49,12 @@ public class AdminRequestRestController extends AbstractRequestController {
         return super.getAllPreview();
     }
 
+    @GetMapping("/filter")
+    public List<RequestPreviewDTO> getAllFiltered(@RequestParam(value = "title", required = false) String title,
+                                                  @RequestParam(value = "status", required = false) String requestStatus) {
+        return super.getAllFiltered(title, requestStatus);
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody RequestUpdateDTO dto, @PathVariable int id) {

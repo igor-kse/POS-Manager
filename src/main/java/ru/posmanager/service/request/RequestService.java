@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.exception.NotFoundException;
 import ru.posmanager.model.request.Request;
+import ru.posmanager.model.request.RequestStatus;
 import ru.posmanager.repository.bank.BankDeviceRepository;
 import ru.posmanager.repository.request.RequestRepository;
 import ru.posmanager.repository.user.UserRepository;
@@ -16,6 +17,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import static ru.posmanager.util.StringUtil.emptyStringIfNull;
 import static ru.posmanager.util.ValidationUtil.*;
 
 @Service
@@ -56,6 +58,14 @@ public class RequestService {
 
     public List<RequestPreviewDTO> getAllPreview() {
         List<Request> requests = requestRepository.getAll();
+        return requests != null ? requestMapper.toPreviewDTO(requests) : Collections.emptyList();
+    }
+
+    public List<RequestPreviewDTO> getAllFiltered(String title, RequestStatus requestStatus) {
+        String titleNotNull = emptyStringIfNull(title);
+        List<Request> requests = requestStatus == null
+                ? requestRepository.getAllFiltered(titleNotNull)
+                : requestRepository.getAllFilteredWithStatus(titleNotNull, requestStatus);
         return requests != null ? requestMapper.toPreviewDTO(requests) : Collections.emptyList();
     }
 

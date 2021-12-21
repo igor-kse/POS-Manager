@@ -2,6 +2,7 @@ package ru.posmanager.web.controller.request;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.posmanager.model.request.RequestStatus;
 import ru.posmanager.service.request.RequestService;
 import ru.posmanager.to.request.RequestDTO;
 import ru.posmanager.to.request.RequestPreviewDTO;
@@ -25,6 +26,12 @@ public abstract class AbstractRequestController {
     public RequestDTO get(int id) {
         log.info("getting Request with id {}", id);
         return service.get(id);
+    }
+
+    public List<RequestPreviewDTO> getAllFiltered(String title, String requestStatus) {
+        log.info("getting all Request filtered by title={}", title);
+        RequestStatus status = requestStatus != null ? RequestStatus.valueOf(requestStatus) : null;
+        return service.getAllFiltered(title, status);
     }
 
     public List<RequestPreviewDTO> getAllPreview() {

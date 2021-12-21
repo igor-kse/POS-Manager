@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.model.request.Request;
+import ru.posmanager.model.request.RequestStatus;
 
 import java.util.List;
 
@@ -21,4 +22,10 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
     @Query("SELECT r FROM Request r ORDER BY r.created DESC, r.modified DESC")
     List<Request> getAll();
+
+    @Query("SELECT r FROM Request r WHERE r.title LIKE :title% ORDER BY r.created DESC")
+    List<Request> getAllFiltered(@Param("title") String title);
+
+    @Query("SELECT r FROM Request r WHERE r.title LIKE :title% AND r.requestStatus = :request_status ORDER BY r.created DESC")
+    List<Request> getAllFilteredWithStatus(@Param("title") String title, @Param("request_status") RequestStatus requestStatus);
 }
