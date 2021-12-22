@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.bank.BankDeviceService;
 import ru.posmanager.to.bank.BankDeviceDTO;
+import ru.posmanager.to.bank.BankDevicePreviewDTO;
 import ru.posmanager.to.bank.BankDeviceUpdateDTO;
 
 import java.net.URI;
@@ -42,6 +43,13 @@ public class AdminBankDeviceRestController extends AbstractBankDeviceController 
     @GetMapping
     public List<BankDeviceDTO> getAll() {
         return super.getAll();
+    }
+
+    @Override
+    @GetMapping("/filter")
+    public List<BankDevicePreviewDTO> getAllByTidAndAddress(@RequestParam(value = "tid", required = false) String tid,
+                                                            @RequestParam(value = "address", required = false) String address) {
+        return super.getAllByTidAndAddress(tid, address);
     }
 
     @Override

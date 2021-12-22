@@ -1,12 +1,10 @@
 package ru.posmanager.web.controller.bankdevice;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.posmanager.service.bank.BankDeviceService;
 import ru.posmanager.to.bank.BankDeviceDTO;
+import ru.posmanager.to.bank.BankDevicePreviewDTO;
 
 import java.util.List;
 
@@ -29,5 +27,12 @@ public class BankDeviceRestController extends AbstractBankDeviceController {
     @GetMapping
     public List<BankDeviceDTO> getAll() {
         return super.getAll();
+    }
+
+    @Override
+    @GetMapping("/filter")
+    public List<BankDevicePreviewDTO> getAllByTidAndAddress(@RequestParam(value = "tid", required = false) String tid,
+                                                            @RequestParam(value = "address", required = false) String address) {
+        return super.getAllByTidAndAddress(tid, address);
     }
 }

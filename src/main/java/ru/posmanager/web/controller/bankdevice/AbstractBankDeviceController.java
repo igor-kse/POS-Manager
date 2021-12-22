@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.posmanager.service.bank.BankDeviceService;
 import ru.posmanager.to.bank.BankDeviceDTO;
+import ru.posmanager.to.bank.BankDevicePreviewDTO;
 import ru.posmanager.to.bank.BankDeviceUpdateDTO;
 
 import java.util.List;
@@ -29,6 +30,11 @@ public abstract class AbstractBankDeviceController {
     public List<BankDeviceDTO> getAll() {
         log.info("getting all BankDeviceDTO");
         return service.getAll();
+    }
+
+    public List<BankDevicePreviewDTO> getAllByTidAndAddress(String tid, String address) {
+        log.info("getting all BankDevicePreviewDTO filtered by tid={} and address={}", tid, address);
+        return service.getAllByTidAndAddress(tid, address);
     }
 
     public void update(BankDeviceUpdateDTO dto, int id) {

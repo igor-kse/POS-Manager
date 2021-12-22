@@ -21,4 +21,7 @@ public interface BankDeviceRepository extends JpaRepository<BankDevice, Integer>
 
     @Query("SELECT b FROM BankDevice b ORDER BY b.affiliate.name, b.device.vendor.name, b.device.model")
     List<BankDevice> getAll();
+
+    @Query("SELECT b FROM BankDevice b WHERE b.tid LIKE :tid% AND b.address LIKE :address%")
+    List<BankDevice> getAllByTidAndAddress(@Param("tid") String tid, @Param("address") String address);
 }

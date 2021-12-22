@@ -12,12 +12,14 @@ import ru.posmanager.repository.bank.ContractorRepository;
 import ru.posmanager.repository.device.DeviceRepository;
 import ru.posmanager.repository.device.FirmwareRepository;
 import ru.posmanager.to.bank.BankDeviceDTO;
+import ru.posmanager.to.bank.BankDevicePreviewDTO;
 import ru.posmanager.to.bank.BankDeviceUpdateDTO;
 import ru.posmanager.util.mappers.BankDeviceMapper;
 
 import java.util.Collections;
 import java.util.List;
 
+import static ru.posmanager.util.StringUtil.emptyStringIfNull;
 import static ru.posmanager.util.ValidationUtil.*;
 
 @Service
@@ -63,11 +65,18 @@ public class BankDeviceService {
         return bankDevices != null ? bankDeviceMapper.toDTO(bankDevices) : Collections.emptyList();
     }
 
+    @Transactional
     public void update(BankDeviceUpdateDTO dto, int id) {
         assureIdConsistent(dto, id);
         bankDeviceRepository.findById(id).orElseThrow(() -> new NotFoundException(BankDevice.class, id));
         var bankDevice = getEntityFromUpdateDTO(dto);
         bankDeviceRepository.save(bankDevice);
+    }
+
+    public List<BankDevicePreviewDTO> getAllByTidAndAddress(String tid, String address) {
+        List<BankDevice> bankDevices =
+                bankDeviceRepository.getAllByTidAndAddress(emptyStringIfNull(tid), emptyStringIfNull(address));
+        return bankDeviceMapper.toPreviewDTO(bankDevices);
     }
 
     public void delete(int id) {

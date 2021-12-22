@@ -69,6 +69,10 @@ public class BankDeviceMapper {
         return mapper.map(entity, BankDevicePreviewDTO.class);
     }
 
+    public List<BankDevicePreviewDTO> toPreviewDTO(List<BankDevice> entities) {
+        return entities.stream().map(this::toPreviewDTO).toList();
+    }
+
     public BankDevicePreviewDTO toPreviewDTO(BankDeviceDTO dto) {
         return mapper.map(dto, BankDevicePreviewDTO.class);
     }
