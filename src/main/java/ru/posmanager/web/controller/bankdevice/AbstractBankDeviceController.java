@@ -11,39 +11,39 @@ import java.util.List;
 
 public abstract class AbstractBankDeviceController {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private final BankDeviceService service;
+    private final BankDeviceService bankDeviceService;
 
-    public AbstractBankDeviceController(BankDeviceService service) {
-        this.service = service;
+    public AbstractBankDeviceController(BankDeviceService bankDeviceService) {
+        this.bankDeviceService = bankDeviceService;
     }
 
     public BankDeviceDTO create(BankDeviceUpdateDTO dto) {
         log.info("creating BankDeviceDTO from {}", dto);
-        return service.create(dto);
+        return bankDeviceService.create(dto);
     }
 
     public BankDeviceDTO get(int id) {
         log.info("getting BankDeviceDTO with id {}", id);
-        return service.get(id);
+        return bankDeviceService.get(id);
     }
 
     public List<BankDeviceDTO> getAll() {
         log.info("getting all BankDeviceDTO");
-        return service.getAll();
+        return bankDeviceService.getAll();
     }
 
     public List<BankDevicePreviewDTO> getAllByTidAndAddress(String tid, String address) {
         log.info("getting all BankDevicePreviewDTO filtered by tid={} and address={}", tid, address);
-        return service.getAllByTidAndAddress(tid, address);
+        return bankDeviceService.getAllByTidAndAddress(tid, address);
     }
 
     public void update(BankDeviceUpdateDTO dto, int id) {
         log.info("updating BankDeviceDTO {} with {}", id, dto);
-        service.update(dto, id);
+        bankDeviceService.update(dto, id);
     }
 
     public void delete(int id) {
         log.info("deleting BankDeviceDTO with id {}", id);
-        service.delete(id);
+        bankDeviceService.delete(id);
     }
 }

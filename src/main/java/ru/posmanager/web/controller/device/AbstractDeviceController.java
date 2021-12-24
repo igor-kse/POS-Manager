@@ -10,34 +10,34 @@ import java.util.List;
 
 public abstract class AbstractDeviceController {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private final DeviceService service;
+    private final DeviceService deviceService;
 
-    public AbstractDeviceController(DeviceService service) {
-        this.service = service;
+    public AbstractDeviceController(DeviceService deviceService) {
+        this.deviceService = deviceService;
     }
 
     public DeviceDTO create(DeviceUpdateDTO dto) {
         log.info("creating DeviceDTO from {}", dto);
-        return service.create(dto);
+        return deviceService.create(dto);
     }
 
     public DeviceDTO get(int id) {
         log.info("getting DeviceDTO with id {}", id);
-        return service.get(id);
+        return deviceService.get(id);
     }
 
     public List<DeviceDTO> getAll() {
         log.info("getting all DeviceDTO");
-        return service.getAll();
+        return deviceService.getAll();
     }
 
     public void update(DeviceUpdateDTO dto, int id) {
         log.info("updating DeviceDTO {} with {}", id, dto);
-        service.update(dto, id);
+        deviceService.update(dto, id);
     }
 
     public void delete(int id) {
         log.info("deleting DeviceDTO with id {}", id);
-        service.delete(id);
+        deviceService.delete(id);
     }
 }

@@ -14,29 +14,29 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminBankDeviceRestController.BANK_DEVICE_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminBankDeviceRestController.BANK_DEVICE_ADMIN_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminBankDeviceRestController extends AbstractBankDeviceController {
-    public static final String BANK_DEVICE_REST_URL = "/api/admin/bankdevices";
+    public static final String BANK_DEVICE_ADMIN_REST_URL = "/api/admin/bankdevices/";
 
-    public AdminBankDeviceRestController(BankDeviceService service) {
-        super(service);
+    public AdminBankDeviceRestController(BankDeviceService bankDeviceService) {
+        super(bankDeviceService);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BankDeviceDTO> createWithLocation(@RequestBody BankDeviceUpdateDTO dto) {
-        BankDeviceDTO created = super.create(dto);
+    public ResponseEntity<BankDeviceDTO> createWithLocation(@RequestBody BankDeviceUpdateDTO bankDeviceUpdateDTO) {
+        BankDeviceDTO created = super.create(bankDeviceUpdateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(BANK_DEVICE_REST_URL + "/{id}")
+                .path(BANK_DEVICE_ADMIN_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public BankDeviceDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public BankDeviceDTO get(@PathVariable("id") int bankDeviceId) {
+        return super.get(bankDeviceId);
     }
 
     @Override
@@ -46,23 +46,23 @@ public class AdminBankDeviceRestController extends AbstractBankDeviceController 
     }
 
     @Override
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public List<BankDevicePreviewDTO> getAllByTidAndAddress(@RequestParam(value = "tid", required = false) String tid,
                                                             @RequestParam(value = "address", required = false) String address) {
         return super.getAllByTidAndAddress(tid, address);
     }
 
     @Override
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody BankDeviceUpdateDTO dto, @PathVariable int id) {
-        super.update(dto, id);
+    public void update(@RequestBody BankDeviceUpdateDTO bankDeviceUpdateDTO, @PathVariable("id") int bankDeviceId) {
+        super.update(bankDeviceUpdateDTO, bankDeviceId);
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
+    public void delete(@PathVariable("id") int bankDeviceId) {
+        super.delete(bankDeviceId);
     }
 }

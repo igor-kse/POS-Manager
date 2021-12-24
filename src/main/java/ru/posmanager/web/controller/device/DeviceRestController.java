@@ -13,16 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping(value = DeviceRestController.DEVICE_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DeviceRestController extends AbstractDeviceController {
-    public static final String DEVICE_REST_URL = "/api/devices";
+    public static final String DEVICE_REST_URL = "/api/devices/";
 
-    public DeviceRestController(DeviceService service) {
-        super(service);
+    public DeviceRestController(DeviceService deviceService) {
+        super(deviceService);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public DeviceDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public DeviceDTO get(@PathVariable("id") int deviceId) {
+        return super.get(deviceId);
     }
 
     @Override

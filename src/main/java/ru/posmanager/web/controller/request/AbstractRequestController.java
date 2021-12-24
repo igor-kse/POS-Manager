@@ -12,40 +12,40 @@ import java.util.List;
 
 public abstract class AbstractRequestController {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private final RequestService service;
+    private final RequestService requestService;
 
-    public AbstractRequestController(RequestService service) {
-        this.service = service;
+    public AbstractRequestController(RequestService requestService) {
+        this.requestService = requestService;
     }
 
-    public RequestDTO create(RequestUpdateDTO requestDTO) {
-        log.info("create Request from {}", requestDTO);
-        return service.create(requestDTO);
+    public RequestDTO create(RequestUpdateDTO dto) {
+        log.info("create Request from {}", dto);
+        return requestService.create(dto);
     }
 
     public RequestDTO get(int id) {
         log.info("getting Request with id {}", id);
-        return service.get(id);
+        return requestService.get(id);
     }
 
     public List<RequestPreviewDTO> getAllFiltered(String title, String requestStatus) {
         log.info("getting all Request filtered by title={}", title);
         RequestStatus status = requestStatus != null ? RequestStatus.valueOf(requestStatus) : null;
-        return service.getAllFiltered(title, status);
+        return requestService.getAllFiltered(title, status);
     }
 
     public List<RequestPreviewDTO> getAllPreview() {
         log.info("getting all Request");
-        return service.getAllPreview();
+        return requestService.getAllPreview();
     }
 
     public void update(RequestUpdateDTO dto, int id) {
         log.info("updating Request {} with {}", id, dto);
-        service.update(dto, id);
+        requestService.update(dto, id);
     }
 
     public void delete(int id) {
         log.info("deleting Request with id {}", id);
-        service.delete(id);
+        requestService.delete(id);
     }
 }

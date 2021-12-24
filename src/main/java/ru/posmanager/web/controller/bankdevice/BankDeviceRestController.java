@@ -11,16 +11,16 @@ import java.util.List;
 @RestController
 @RequestMapping(value = BankDeviceRestController.BANK_DEVICE_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class BankDeviceRestController extends AbstractBankDeviceController {
-    public static final String BANK_DEVICE_REST_URL = "/api/bankdevices";
+    public static final String BANK_DEVICE_REST_URL = "/api/bankdevices/";
 
-    public BankDeviceRestController(BankDeviceService service) {
-        super(service);
+    public BankDeviceRestController(BankDeviceService bankDeviceService) {
+        super(bankDeviceService);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public BankDeviceDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public BankDeviceDTO get(@PathVariable("id") int bankDeviceId) {
+        return super.get(bankDeviceId);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class BankDeviceRestController extends AbstractBankDeviceController {
     }
 
     @Override
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public List<BankDevicePreviewDTO> getAllByTidAndAddress(@RequestParam(value = "tid", required = false) String tid,
                                                             @RequestParam(value = "address", required = false) String address) {
         return super.getAllByTidAndAddress(tid, address);

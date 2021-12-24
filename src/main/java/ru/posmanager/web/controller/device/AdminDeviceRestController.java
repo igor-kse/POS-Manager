@@ -13,12 +13,12 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminDeviceRestController.DEVICE_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminDeviceRestController.DEVICE_ADMIN_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminDeviceRestController extends AbstractDeviceController {
-    public static final String DEVICE_REST_URL = "/api/admin/devices";
+    public static final String DEVICE_ADMIN_REST_URL = "/api/admin/devices/";
 
-    public AdminDeviceRestController(DeviceService service) {
-        super(service);
+    public AdminDeviceRestController(DeviceService deviceService) {
+        super(deviceService);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -26,16 +26,16 @@ public class AdminDeviceRestController extends AbstractDeviceController {
         DeviceDTO created = super.create(deviceUpdateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(DEVICE_REST_URL + "/{id}")
+                .path(DEVICE_ADMIN_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public DeviceDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public DeviceDTO get(@PathVariable("id") int deviceId) {
+        return super.get(deviceId);
     }
 
     @Override
@@ -45,16 +45,16 @@ public class AdminDeviceRestController extends AbstractDeviceController {
     }
 
     @Override
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody DeviceUpdateDTO dto, @PathVariable int id) {
-        super.update(dto, id);
+    public void update(@RequestBody DeviceUpdateDTO deviceUpdateDTO, @PathVariable("id") int deviceId) {
+        super.update(deviceUpdateDTO, deviceId);
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
+    public void delete(@PathVariable("id") int deviceId) {
+        super.delete(deviceId);
     }
 }

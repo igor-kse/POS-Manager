@@ -14,30 +14,30 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminAffiliateRestController.AFFILIATE_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminAffiliateRestController.AFFILIATE_ADMIN_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminAffiliateRestController extends AbstractAffiliateController {
-    public static final String AFFILIATE_REST_URL = "/api/admin/affiliates";
+    public static final String AFFILIATE_ADMIN_REST_URL = "/api/admin/affiliates/";
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public AdminAffiliateRestController(AffiliateService service) {
-        super(service);
+    public AdminAffiliateRestController(AffiliateService affiliateService) {
+        super(affiliateService);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AffiliateDTO> createWithLocation(@RequestBody AffiliateDTO to) {
-        AffiliateDTO created = super.create(to);
+    public ResponseEntity<AffiliateDTO> createWithLocation(@RequestBody AffiliateDTO affiliateDTO) {
+        AffiliateDTO created = super.create(affiliateDTO);
         log.info("Created affiliate {}", created);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(AFFILIATE_REST_URL + "/{id}")
+                .path(AFFILIATE_ADMIN_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
-    @GetMapping("/{id}")
-    public AffiliateDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public AffiliateDTO get(@PathVariable("id") int affiliateId) {
+        return super.get(affiliateId);
     }
 
     @GetMapping
@@ -45,15 +45,15 @@ public class AdminAffiliateRestController extends AbstractAffiliateController {
         return super.getAll();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{affiliateId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody AffiliateDTO to, @PathVariable int id) {
-        super.update(to, id);
+    public void update(@RequestBody AffiliateDTO to, @PathVariable int affiliateId) {
+        super.update(to, affiliateId);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{affiliateId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
+    public void delete(@PathVariable int affiliateId) {
+        super.delete(affiliateId);
     }
 }

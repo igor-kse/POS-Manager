@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = UserRestController.USER_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestController extends AbstractUserController {
-    public static final String USER_REST_URL = "/api/users";
+    public static final String USER_REST_URL = "/api/users/";
 
     private final AuthorizedUserExtractor authorizedUserExtractor;
 
@@ -23,14 +23,14 @@ public class UserRestController extends AbstractUserController {
         this.authorizedUserExtractor = authorizedUserExtractor;
     }
 
-    @GetMapping("/profile")
+    @GetMapping("profile")
     public UserDTO profile() {
         return authorizedUserExtractor.get().getUserDTO();
     }
 
-    @GetMapping("/{id}")
-    public UserDTO get(@PathVariable int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public UserDTO get(@PathVariable("id") int userId) {
+        return super.get(userId);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UserRestController extends AbstractUserController {
     }
 
     @Override
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public List<UserPreviewDTO> getAllFilteredUserPreviewDTO(
             @RequestParam(value = "last_name", required = false) String lastName,
             @RequestParam(value = "first_name", required = false) String firstName,
@@ -48,7 +48,7 @@ public class UserRestController extends AbstractUserController {
         return super.getAllFilteredUserPreviewDTO(lastName, firstName, middleName);
     }
 
-    @PatchMapping(value = "/profile", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "profile", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Map<String, Object> updates) {
         int userId = authorizedUserExtractor.authorizedUserId();

@@ -12,12 +12,12 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminContractorRestController.CONTRACTOR_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminContractorRestController.CONTRACTOR_ADMIN_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminContractorRestController extends AbstractContractorController {
-    public static final String CONTRACTOR_REST_URL = "/api/admin/contractors";
+    public static final String CONTRACTOR_ADMIN_REST_URL = "/api/admin/contractors/";
 
-    public AdminContractorRestController(ContractorService service) {
-        super(service);
+    public AdminContractorRestController(ContractorService contractorService) {
+        super(contractorService);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -25,16 +25,16 @@ public class AdminContractorRestController extends AbstractContractorController 
         ContractorDTO created = super.create(contractorDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(CONTRACTOR_REST_URL + "/{id}")
+                .path(CONTRACTOR_ADMIN_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public ContractorDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public ContractorDTO get(@PathVariable("id") int contractorId) {
+        return super.get(contractorId);
     }
 
     @Override
@@ -44,16 +44,16 @@ public class AdminContractorRestController extends AbstractContractorController 
     }
 
     @Override
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody ContractorDTO to, @PathVariable int id) {
-        super.update(to, id);
+    public void update(@RequestBody ContractorDTO contractorDTO, @PathVariable("id") int contractorId) {
+        super.update(contractorDTO, contractorId);
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
+    public void delete(@PathVariable("id") int contractorId) {
+        super.delete(contractorId);
     }
 }

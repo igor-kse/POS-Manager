@@ -17,31 +17,31 @@ import java.util.List;
 @RestController
 @RequestMapping(value = RequestRestController.REQUEST_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RequestRestController extends AbstractRequestController {
-    public static final String REQUEST_REST_URL = "/api/requests";
+    public static final String REQUEST_REST_URL = "/api/requests/";
 
     private final AuthorizedUserExtractor authorizedUserExtractor;
 
-    public RequestRestController(RequestService service, AuthorizedUserExtractor authorizedUserExtractor) {
-        super(service);
+    public RequestRestController(RequestService requestService, AuthorizedUserExtractor authorizedUserExtractor) {
+        super(requestService);
         this.authorizedUserExtractor = authorizedUserExtractor;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RequestDTO> createWithLocation(@RequestBody RequestUpdateDTO dto) {
+    public ResponseEntity<RequestDTO> createWithLocation(@RequestBody RequestUpdateDTO requestUpdateDTO) {
         int authorId = authorizedUserExtractor.authorizedUserId();
-        dto.setAuthorId(authorId);
-        RequestDTO created = super.create(dto);
+        requestUpdateDTO.setAuthorId(authorId);
+        RequestDTO created = super.create(requestUpdateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REQUEST_REST_URL + "/{id}")
+                .path(REQUEST_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
-    @GetMapping("/{id}")
-    public RequestDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public RequestDTO get(@PathVariable("id") int requestId) {
+        return super.get(requestId);
     }
 
     @GetMapping
@@ -49,23 +49,21 @@ public class RequestRestController extends AbstractRequestController {
         return super.getAllPreview();
     }
 
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public List<RequestPreviewDTO> getAllFiltered(@RequestParam(value = "title", required = false) String title,
                                                   @RequestParam(value = "status", required = false) String requestStatus) {
         return super.getAllFiltered(title, requestStatus);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody RequestUpdateDTO dto, @PathVariable int id) {
+    public void update(@RequestBody RequestUpdateDTO requestUpdateDTO, @PathVariable("id") int requestId) {
         int userId = authorizedUserExtractor.authorizedUserId();
-        RequestDTO request = super.get(id);
+        RequestDTO request = super.get(requestId);
         if (userId == request.getAuthor().getId() || userId == request.getImplementor().getId()) {
-            super.update(dto, id);
+            super.update(requestUpdateDTO, requestId);
         } else {
-            throw new IllegalArgumentException("The user " + userId + " cannot update Request " + id);
+            throw new IllegalArgumentException("The user " + userId + " cannot update Request " + requestId);
         }
     }
-
-
 }

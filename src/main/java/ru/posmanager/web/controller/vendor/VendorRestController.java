@@ -8,18 +8,18 @@ import ru.posmanager.to.device.VendorDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = VendorRestController.VENDOR_PEST_CONTROLLER, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = VendorRestController.VENDOR_REST_CONTROLLER, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VendorRestController extends AbstractVendorController {
-    public static final String VENDOR_PEST_CONTROLLER = "/api/vendors";
+    public static final String VENDOR_REST_CONTROLLER = "/api/vendors/";
 
-    public VendorRestController(VendorService service) {
-        super(service);
+    public VendorRestController(VendorService vendorService) {
+        super(vendorService);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public VendorDTO get(@PathVariable int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public VendorDTO get(@PathVariable("id") int vendorId) {
+        return super.get(vendorId);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class VendorRestController extends AbstractVendorController {
     }
 
     @Override
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public List<VendorDTO> getAllFilteredByName(@RequestParam(value = "name", required = false) String name) {
         return super.getAllFilteredByName(name);
     }

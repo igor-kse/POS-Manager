@@ -11,13 +11,13 @@ public abstract class AbstractContractorController {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final ContractorService service;
 
-    public AbstractContractorController(ContractorService service) {
-        this.service = service;
+    public AbstractContractorController(ContractorService contractorService) {
+        this.service = contractorService;
     }
 
-    public ContractorDTO create(ContractorDTO to) {
-        log.info("creating ContractorDTO from {}", to);
-        return service.create(to);
+    public ContractorDTO create(ContractorDTO dto) {
+        log.info("creating ContractorDTO from {}", dto);
+        return service.create(dto);
     }
 
     public ContractorDTO get(int id) {
@@ -30,9 +30,9 @@ public abstract class AbstractContractorController {
         return service.getAll();
     }
 
-    public void update(ContractorDTO to, int id) {
-        log.info("updating ContractorDTO {} with {}", id, to);
-        service.update(to, id);
+    public void update(ContractorDTO dto, int id) {
+        log.info("updating ContractorDTO {} with {}", id, dto);
+        service.update(dto, id);
     }
 
     public void delete(int id) {

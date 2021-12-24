@@ -13,16 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping(value = DepartmentRestController.DEPARTMENT_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DepartmentRestController extends AbstractDepartmentController {
-    public static final String DEPARTMENT_REST_URL = "/api/departments";
+    public static final String DEPARTMENT_REST_URL = "/api/departments/";
 
-    public DepartmentRestController(DepartmentService service) {
-        super(service);
+    public DepartmentRestController(DepartmentService departmentService) {
+        super(departmentService);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public DepartmentDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public DepartmentDTO get(@PathVariable("id") int departmentId) {
+        return super.get(departmentId);
     }
 
     @Override

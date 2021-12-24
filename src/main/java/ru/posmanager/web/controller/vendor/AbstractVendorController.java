@@ -9,39 +9,39 @@ import java.util.List;
 
 public abstract class AbstractVendorController {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private final VendorService service;
+    private final VendorService vendorService;
 
-    public AbstractVendorController(VendorService service) {
-        this.service = service;
+    public AbstractVendorController(VendorService vendorService) {
+        this.vendorService = vendorService;
     }
 
-    public VendorDTO create(VendorDTO to) {
-        log.info("creating Vendor from {}", to);
-        return service.create(to);
+    public VendorDTO create(VendorDTO dto) {
+        log.info("creating Vendor from {}", dto);
+        return vendorService.create(dto);
     }
 
     public VendorDTO get(int id) {
         log.info("getting Vendor with id {}", id);
-        return service.get(id);
+        return vendorService.get(id);
     }
 
     public List<VendorDTO> getAll() {
         log.info("getting all Vendors");
-        return service.getAll();
+        return vendorService.getAll();
     }
 
     public List<VendorDTO> getAllFilteredByName(String name) {
         log.info("getting all Vendors filtered by name={}", name);
-        return service.getAllVendorDTOFilteredByTitle(name);
+        return vendorService.getAllVendorDTOFilteredByTitle(name);
     }
 
-    public void update(VendorDTO to, int id) {
-        log.info("updating Vendor {} with {}", id, to);
-        service.update(to, id);
+    public void update(VendorDTO dto, int id) {
+        log.info("updating Vendor {} with {}", id, dto);
+        vendorService.update(dto, id);
     }
 
     public void delete(int id) {
         log.info("deleting Vendor with id {}", id);
-        service.delete(id);
+        vendorService.delete(id);
     }
 }

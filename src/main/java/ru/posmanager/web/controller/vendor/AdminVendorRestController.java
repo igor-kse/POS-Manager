@@ -12,12 +12,12 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminVendorRestController.VENDOR_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminVendorRestController.VENDOR_ADMIN_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminVendorRestController extends AbstractVendorController {
-    public static final String VENDOR_REST_URL = "/api/admin/vendors";
+    public static final String VENDOR_ADMIN_REST_URL = "/api/admin/vendors/";
 
-    public AdminVendorRestController(VendorService service) {
-        super(service);
+    public AdminVendorRestController(VendorService vendorService) {
+        super(vendorService);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -25,14 +25,14 @@ public class AdminVendorRestController extends AbstractVendorController {
         VendorDTO created = super.create(vendorDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(VENDOR_REST_URL + "/{id}")
+                .path(VENDOR_ADMIN_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public VendorDTO get(@PathVariable("id") int id) {
         return super.get(id);
     }
@@ -44,20 +44,20 @@ public class AdminVendorRestController extends AbstractVendorController {
     }
 
     @Override
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public List<VendorDTO> getAllFilteredByName(@RequestParam(value = "name", required = false) String name) {
         return super.getAllFilteredByName(name);
     }
 
     @Override
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody VendorDTO to, @PathVariable int id) {
-        super.update(to, id);
+    public void update(@RequestBody VendorDTO dto, @PathVariable int id) {
+        super.update(dto, id);
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         super.delete(id);

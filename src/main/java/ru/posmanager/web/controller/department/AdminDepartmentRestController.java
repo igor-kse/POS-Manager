@@ -12,12 +12,12 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminDepartmentRestController.DEPARTMENT_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminDepartmentRestController.DEPARTMENT_ADMIN_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminDepartmentRestController extends AbstractDepartmentController {
-    public static final String DEPARTMENT_REST_URL = "/api/admin/departments";
+    public static final String DEPARTMENT_ADMIN_REST_URL = "/api/admin/departments/";
 
-    public AdminDepartmentRestController(DepartmentService service) {
-        super(service);
+    public AdminDepartmentRestController(DepartmentService departmentService) {
+        super(departmentService);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -25,16 +25,16 @@ public class AdminDepartmentRestController extends AbstractDepartmentController 
         DepartmentDTO created = super.create(departmentDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(DEPARTMENT_REST_URL + "/{id}")
+                .path(DEPARTMENT_ADMIN_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public DepartmentDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public DepartmentDTO get(@PathVariable("id") int departmentId) {
+        return super.get(departmentId);
     }
 
     @Override
@@ -44,16 +44,16 @@ public class AdminDepartmentRestController extends AbstractDepartmentController 
     }
 
     @Override
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody DepartmentDTO to, @PathVariable int id) {
-        super.update(to, id);
+    public void update(@RequestBody DepartmentDTO departmentDTO, @PathVariable("id") int departmentId) {
+        super.update(departmentDTO, departmentId);
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
+    public void delete(@PathVariable("id") int departmentId) {
+        super.delete(departmentId);
     }
 }

@@ -13,16 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping(value = ContractorRestController.CONTRACTOR_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ContractorRestController extends AbstractContractorController {
-    public static final String CONTRACTOR_REST_URL = "/api/contractors";
+    public static final String CONTRACTOR_REST_URL = "/api/contractors/";
 
-    public ContractorRestController(ContractorService service) {
-        super(service);
+    public ContractorRestController(ContractorService contractorService) {
+        super(contractorService);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public ContractorDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public ContractorDTO get(@PathVariable("id") int contractorId) {
+        return super.get(contractorId);
     }
 
     @Override

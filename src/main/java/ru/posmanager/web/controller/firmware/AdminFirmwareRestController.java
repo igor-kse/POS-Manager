@@ -13,29 +13,29 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminFirmwareRestController.FIRMWARE_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminFirmwareRestController.FIRMWARE_ADMIN_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminFirmwareRestController extends AbstractFirmwareController {
-    public static final String FIRMWARE_REST_URL = "/api/admin/firmwares";
+    public static final String FIRMWARE_ADMIN_REST_URL = "/api/admin/firmwares/";
 
-    public AdminFirmwareRestController(FirmwareService service) {
-        super(service);
+    public AdminFirmwareRestController(FirmwareService firmwareService) {
+        super(firmwareService);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FirmwareDTO> createWithLocation(@RequestBody FirmwareUpdateDTO updateDTO) {
-        FirmwareDTO created = super.create(updateDTO);
+    public ResponseEntity<FirmwareDTO> createWithLocation(@RequestBody FirmwareUpdateDTO firmwareUpdateDTO) {
+        FirmwareDTO created = super.create(firmwareUpdateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(FIRMWARE_REST_URL + "/{id}")
+                .path(FIRMWARE_ADMIN_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public FirmwareDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public FirmwareDTO get(@PathVariable("id") int firmwareId) {
+        return super.get(firmwareId);
     }
 
     @Override
@@ -45,16 +45,16 @@ public class AdminFirmwareRestController extends AbstractFirmwareController {
     }
 
     @Override
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody FirmwareUpdateDTO dto, @PathVariable int id) {
-        super.update(dto, id);
+    public void update(@RequestBody FirmwareUpdateDTO firmwareUpdateDTO, @PathVariable("id") int firmwareId) {
+        super.update(firmwareUpdateDTO, firmwareId);
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
+    public void delete(@PathVariable("id") int firmwareId) {
+        super.delete(firmwareId);
     }
 }

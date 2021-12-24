@@ -13,15 +13,15 @@ import java.util.List;
 @RestController
 @RequestMapping(value = AffiliateRestController.AFFILIATE_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AffiliateRestController extends AbstractAffiliateController {
-    public static final String AFFILIATE_REST_URL = "/api/affiliates";
+    public static final String AFFILIATE_REST_URL = "/api/affiliates/";
 
-    public AffiliateRestController(AffiliateService service) {
-        super(service);
+    public AffiliateRestController(AffiliateService affiliateService) {
+        super(affiliateService);
     }
 
-    @GetMapping("/{id}")
-    public AffiliateDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public AffiliateDTO get(@PathVariable("id") int affiliateId) {
+        return super.get(affiliateId);
     }
 
     @GetMapping

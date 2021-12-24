@@ -19,11 +19,11 @@ public class AuthenticationRestController {
 
     private final AuthenticationManager authenticationManager;
 
-    private final UserService service;
+    private final UserService userService;
 
-    public AuthenticationRestController(AuthenticationManager authenticationManager, UserService service) {
+    public AuthenticationRestController(AuthenticationManager authenticationManager, UserService userService) {
         this.authenticationManager = authenticationManager;
-        this.service = service;
+        this.userService = userService;
     }
 
     @PostMapping("/login")
@@ -32,7 +32,7 @@ public class AuthenticationRestController {
         String password = request.getPassword();
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        AuthorizedUser user = service.loadUserByUsername(username);
+        AuthorizedUser user = userService.loadUserByUsername(username);
         String token = generateJsonWebToken(username, user.getUserDTO().getRoles().contains(Role.ADMIN));
         return ResponseEntity.ok(new UserResponse(user.getUserDTO(), token));
     }

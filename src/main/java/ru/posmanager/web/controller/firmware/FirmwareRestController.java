@@ -13,16 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping(value = FirmwareRestController.FIRMWARE_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class FirmwareRestController extends AbstractFirmwareController {
-    public static final String FIRMWARE_REST_URL = "/api/firmwares";
+    public static final String FIRMWARE_REST_URL = "/api/firmwares/";
 
-    public FirmwareRestController(FirmwareService service) {
-        super(service);
+    public FirmwareRestController(FirmwareService firmwareService) {
+        super(firmwareService);
     }
 
     @Override
-    @GetMapping("/{id}")
-    public FirmwareDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public FirmwareDTO get(@PathVariable("id") int firmwareId) {
+        return super.get(firmwareId);
     }
 
     @GetMapping

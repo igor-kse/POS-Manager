@@ -15,33 +15,33 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminRequestRestController.ADMIN_REQUEST_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminRequestRestController.REQUEST_ADMIN_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminRequestRestController extends AbstractRequestController {
-    public static final String ADMIN_REQUEST_REST_URL = "/api/admin/requests";
+    public static final String REQUEST_ADMIN_REST_URL = "/api/admin/requests/";
 
     private final AuthorizedUserExtractor authorizedUserExtractor;
 
-    public AdminRequestRestController(RequestService service, AuthorizedUserExtractor authorizedUserExtractor) {
-        super(service);
+    public AdminRequestRestController(RequestService requestService, AuthorizedUserExtractor authorizedUserExtractor) {
+        super(requestService);
         this.authorizedUserExtractor = authorizedUserExtractor;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RequestDTO> createWithLocation(@RequestBody RequestUpdateDTO dto) {
+    public ResponseEntity<RequestDTO> createWithLocation(@RequestBody RequestUpdateDTO requestUpdateDTO) {
         int authorId = authorizedUserExtractor.authorizedUserId();
-        dto.setAuthorId(authorId);
-        RequestDTO created = super.create(dto);
+        requestUpdateDTO.setAuthorId(authorId);
+        RequestDTO created = super.create(requestUpdateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(ADMIN_REQUEST_REST_URL + "/{id}")
+                .path(REQUEST_ADMIN_REST_URL + "{id}")
                 .buildAndExpand(created.id()).toUri();
 
         return ResponseEntity.created(uri).body(created);
     }
 
-    @GetMapping("/{id}")
-    public RequestDTO get(@PathVariable("id") int id) {
-        return super.get(id);
+    @GetMapping("{id}")
+    public RequestDTO get(@PathVariable("id") int requestId) {
+        return super.get(requestId);
     }
 
     @GetMapping
@@ -49,21 +49,21 @@ public class AdminRequestRestController extends AbstractRequestController {
         return super.getAllPreview();
     }
 
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public List<RequestPreviewDTO> getAllFiltered(@RequestParam(value = "title", required = false) String title,
                                                   @RequestParam(value = "status", required = false) String requestStatus) {
         return super.getAllFiltered(title, requestStatus);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody RequestUpdateDTO dto, @PathVariable int id) {
-        super.update(dto, id);
+    public void update(@RequestBody RequestUpdateDTO requestUpdateDTO, @PathVariable("id") int requestId) {
+        super.update(requestUpdateDTO, requestId);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
+    public void delete(@PathVariable("id") int requestId) {
+        super.delete(requestId);
     }
 }
