@@ -6,24 +6,44 @@ import org.springframework.util.Assert;
 import ru.posmanager.model.user.Role;
 import ru.posmanager.to.BaseDTO;
 
+import javax.validation.constraints.*;
 import java.util.*;
 
 @Data
 @NoArgsConstructor
 public class UserUpdateDTO extends BaseDTO {
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 20)
     protected String firstName;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 20)
     protected String lastName;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 20)
     protected String middleName;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 20)
     protected String city;
 
+    @NotNull
+    @PositiveOrZero
     protected Integer departmentId;
 
+    @Email
+    @NotNull
+    @Size(min = 5, max = 50)
     protected String email;
 
+    @NotBlank
+    @Size(min = 8, max = 255)
     protected String password;
 
     protected boolean enabled = true;

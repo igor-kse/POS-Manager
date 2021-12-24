@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 @Access(AccessType.FIELD)
 public class Device extends BaseEntity {
 
+    @NotNull
     @Column(name = "device_type")
     @Enumerated(EnumType.STRING)
     private DeviceType deviceType;

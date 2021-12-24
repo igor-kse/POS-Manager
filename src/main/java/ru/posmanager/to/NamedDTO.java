@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Getter
@@ -13,6 +14,7 @@ import java.util.Objects;
 public abstract class NamedDTO extends BaseDTO {
 
     @NotBlank
+    @Size(min = 2, max = 80)
     protected String name;
 
     public NamedDTO(Integer id, String name) {

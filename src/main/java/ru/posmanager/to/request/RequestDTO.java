@@ -9,6 +9,9 @@ import ru.posmanager.to.BaseDTO;
 import ru.posmanager.to.bank.BankDevicePreviewDTO;
 import ru.posmanager.to.user.UserPreviewDTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +23,29 @@ import static java.util.Objects.isNull;
 @NoArgsConstructor
 public class RequestDTO extends BaseDTO {
 
+    @NotNull
+    @NotBlank
+    @Size(min = 5, max = 80)
     private String title;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 5)
     private String description;
 
+    @NotNull
     private BankDevicePreviewDTO bankDevice;
 
+    @NotNull
     private RequestType requestType;
 
+    @NotNull
     private ImportanceType importanceType;
 
+    @NotNull
     private RequestStatus requestStatus;
 
+    @NotNull
     private UserPreviewDTO author;
 
     private UserPreviewDTO implementor;
@@ -40,7 +54,7 @@ public class RequestDTO extends BaseDTO {
 
     private LocalDate modified;
 
-    private List<UserCommentDTO> comments;
+    private List<UserCommentDTO> comments = new ArrayList<>();
 
     public RequestDTO(Integer id, String title, String description, BankDevicePreviewDTO bankDevice, RequestType requestType,
                       ImportanceType importanceType, RequestStatus requestStatus, UserPreviewDTO author,

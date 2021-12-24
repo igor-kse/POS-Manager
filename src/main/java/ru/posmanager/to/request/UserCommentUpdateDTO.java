@@ -4,14 +4,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.posmanager.to.BaseDTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 public class UserCommentUpdateDTO extends BaseDTO {
 
+    @NotNull
+    @PositiveOrZero
     private Integer requestId;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 3)
     private String content;
 
     public UserCommentUpdateDTO(UserCommentUpdateDTO u) {

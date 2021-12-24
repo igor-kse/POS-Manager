@@ -9,6 +9,9 @@ import ru.posmanager.model.request.RequestStatus;
 import ru.posmanager.to.BaseDTO;
 import ru.posmanager.to.user.UserPreviewDTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,18 +19,27 @@ import java.util.Objects;
 @NoArgsConstructor
 public class RequestPreviewDTO extends BaseDTO {
 
+    @NotNull
+    @NotBlank
+    @Size(min = 5, max = 80)
     private String title;
 
+    @NotNull
     private DeviceType deviceType;
 
+    @NotNull
     private RequestType requestType;
 
+    @NotNull
     private ImportanceType importanceType;
 
+    @NotNull
     private RequestStatus requestStatus;
 
+    @NotNull
     private UserPreviewDTO author;
 
+    @NotNull
     private UserPreviewDTO implementor;
 
     private LocalDate created;

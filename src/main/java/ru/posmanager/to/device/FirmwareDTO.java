@@ -4,14 +4,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.posmanager.to.BaseDTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 public class FirmwareDTO extends BaseDTO {
 
+    @NotNull
     private VendorDTO vendor;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 30)
     private String version;
 
     public FirmwareDTO(FirmwareDTO firmwareDTO) {

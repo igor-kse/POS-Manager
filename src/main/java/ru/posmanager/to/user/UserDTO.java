@@ -8,6 +8,10 @@ import ru.posmanager.model.user.Role;
 import ru.posmanager.to.BaseDTO;
 import ru.posmanager.to.bank.DepartmentDTO;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Getter
@@ -15,18 +19,36 @@ import java.util.*;
 @NoArgsConstructor
 public class UserDTO extends BaseDTO {
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 20)
     protected String firstName;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 20)
     protected String lastName;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 20)
     protected String middleName;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 20)
     protected String city;
 
+    @NotNull
     protected DepartmentDTO department;
 
+    @Email
+    @NotNull
+    @Size(min = 5, max = 50)
     protected String email;
 
+    @NotBlank
+    @Size(min = 8, max = 255)
     protected String password;
 
     protected boolean enabled = true;

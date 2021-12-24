@@ -5,16 +5,26 @@ import lombok.NoArgsConstructor;
 import ru.posmanager.model.device.DeviceType;
 import ru.posmanager.to.BaseDTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 public class DeviceUpdateDTO extends BaseDTO {
 
+    @NotNull
     private DeviceType deviceType;
 
+    @NotNull
+    @PositiveOrZero
     private Integer vendorId;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 80)
     private String model;
 
     public DeviceUpdateDTO(DeviceUpdateDTO dto) {

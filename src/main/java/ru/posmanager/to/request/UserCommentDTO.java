@@ -5,6 +5,10 @@ import lombok.NoArgsConstructor;
 import ru.posmanager.to.BaseDTO;
 import ru.posmanager.to.user.UserPreviewDTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -12,10 +16,16 @@ import java.util.Objects;
 @NoArgsConstructor
 public class UserCommentDTO extends BaseDTO {
 
+    @NotNull
+    @PositiveOrZero
     private Integer requestId;
 
+    @NotNull
     private UserPreviewDTO user;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 3)
     private String content;
 
     private LocalDateTime created;

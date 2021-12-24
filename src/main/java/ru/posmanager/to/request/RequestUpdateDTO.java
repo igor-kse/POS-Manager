@@ -7,6 +7,10 @@ import ru.posmanager.model.request.RequestType;
 import ru.posmanager.model.request.RequestStatus;
 import ru.posmanager.to.BaseDTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -14,18 +18,31 @@ import java.util.Objects;
 @NoArgsConstructor
 public class RequestUpdateDTO extends BaseDTO {
 
+    @NotNull
+    @NotBlank
+    @Size(min = 5, max = 80)
     private String title;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 5)
     private String description;
 
+    @NotNull
+    @PositiveOrZero
     private Integer bankDeviceId;
 
+    @NotNull
     private RequestType requestType;
 
+    @NotNull
     private ImportanceType importanceType;
 
+    @NotNull
     private RequestStatus requestStatus;
 
+    @NotNull
+    @PositiveOrZero
     private Integer authorId;
 
     private Integer implementorId;

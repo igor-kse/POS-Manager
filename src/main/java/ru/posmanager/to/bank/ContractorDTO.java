@@ -4,16 +4,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.posmanager.to.NamedDTO;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 public class ContractorDTO extends NamedDTO {
 
+    @NotNull
+    @NotBlank
+    @Size(min = 9, max = 9)
     private String unp;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 30)
     private String city;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 5, max = 100)
     private String address;
 
     public ContractorDTO(ContractorDTO to) {
@@ -45,5 +57,4 @@ public class ContractorDTO extends NamedDTO {
     public int hashCode() {
         return Objects.hash(super.hashCode(), unp, city, address);
     }
-    
 }

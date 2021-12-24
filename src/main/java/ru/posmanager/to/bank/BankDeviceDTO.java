@@ -6,22 +6,37 @@ import ru.posmanager.to.BaseDTO;
 import ru.posmanager.to.device.DeviceDTO;
 import ru.posmanager.to.device.FirmwareDTO;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 public class BankDeviceDTO extends BaseDTO {
 
+    @NotNull
+    @NotBlank
+    @Size(min = 8, max = 8)
+    @Column(name = "tid")
     private String tid;
 
-    private String address;
-
+    @NotNull
     private ContractorDTO contractor;
 
+    @NotNull
+    @NotBlank
+    @Size(min = 5, max = 50)
+    private String address;
+
+    @NotNull
     private AffiliateDTO affiliate;
 
+    @NotNull
     private DeviceDTO device;
 
+    @NotNull
     private FirmwareDTO firmware;
 
     public BankDeviceDTO(Integer id, String tid, String address, ContractorDTO contractor, AffiliateDTO affiliate,
