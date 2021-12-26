@@ -2,6 +2,7 @@ package ru.posmanager.to.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.posmanager.HasIdAndEmail;
 import ru.posmanager.to.BaseDTO;
 import ru.posmanager.to.bank.DepartmentDTO;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
-public class UserPreviewDTO extends BaseDTO {
+public class UserPreviewDTO extends BaseDTO implements HasIdAndEmail {
 
     @NotNull
     @NotBlank

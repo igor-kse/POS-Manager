@@ -3,6 +3,7 @@ package ru.posmanager.to.user;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
+import ru.posmanager.HasIdAndEmail;
 import ru.posmanager.model.user.Role;
 import ru.posmanager.to.BaseDTO;
 
@@ -11,7 +12,7 @@ import java.util.*;
 
 @Data
 @NoArgsConstructor
-public class UserUpdateDTO extends BaseDTO {
+public class UserUpdateDTO extends BaseDTO implements HasIdAndEmail {
 
     @NotNull
     @NotBlank

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.util.Assert;
+import ru.posmanager.HasIdAndEmail;
 import ru.posmanager.model.user.Role;
 import ru.posmanager.to.BaseDTO;
 import ru.posmanager.to.bank.DepartmentDTO;
@@ -17,7 +18,7 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserDTO extends BaseDTO {
+public class UserDTO extends BaseDTO implements HasIdAndEmail {
 
     @NotNull
     @NotBlank

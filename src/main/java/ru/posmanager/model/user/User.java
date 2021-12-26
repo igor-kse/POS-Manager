@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ru.posmanager.HasIdAndEmail;
 import ru.posmanager.model.BaseEntity;
 import ru.posmanager.model.bank.Department;
 
@@ -26,7 +27,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Access(AccessType.FIELD)
-public class User extends BaseEntity {
+public class User extends BaseEntity implements HasIdAndEmail {
 
     @NotNull
     @NotBlank
