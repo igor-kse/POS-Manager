@@ -3,18 +3,19 @@ package ru.posmanager.to;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
+import ru.posmanager.HasIdAndName;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class NamedDTO extends BaseDTO {
+public abstract class NamedDTO extends BaseDTO implements HasIdAndName {
 
     @NotBlank
-    @Size(min = 2, max = 80)
+    @Length(min = 2, max = 80)
     protected String name;
 
     public NamedDTO(Integer id, String name) {
