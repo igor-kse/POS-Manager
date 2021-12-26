@@ -10,6 +10,7 @@ import ru.posmanager.to.bank.BankDeviceDTO;
 import ru.posmanager.to.bank.BankDevicePreviewDTO;
 import ru.posmanager.to.bank.BankDeviceUpdateDTO;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class AdminBankDeviceRestController extends AbstractBankDeviceController 
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BankDeviceDTO> createWithLocation(@RequestBody BankDeviceUpdateDTO bankDeviceUpdateDTO) {
+    public ResponseEntity<BankDeviceDTO> createWithLocation(@RequestBody @Valid BankDeviceUpdateDTO bankDeviceUpdateDTO) {
         BankDeviceDTO created = super.create(bankDeviceUpdateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -55,7 +56,7 @@ public class AdminBankDeviceRestController extends AbstractBankDeviceController 
     @Override
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody BankDeviceUpdateDTO bankDeviceUpdateDTO, @PathVariable("id") int bankDeviceId) {
+    public void update(@RequestBody @Valid BankDeviceUpdateDTO bankDeviceUpdateDTO, @PathVariable("id") int bankDeviceId) {
         super.update(bankDeviceUpdateDTO, bankDeviceId);
     }
 

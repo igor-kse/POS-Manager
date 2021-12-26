@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.bank.DepartmentService;
 import ru.posmanager.to.bank.DepartmentDTO;
+import ru.posmanager.web.validator.UniqueValidator;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -16,12 +18,12 @@ import java.util.List;
 public class AdminDepartmentRestController extends AbstractDepartmentController {
     public static final String DEPARTMENT_ADMIN_REST_URL = "/api/admin/departments/";
 
-    public AdminDepartmentRestController(DepartmentService departmentService) {
-        super(departmentService);
+    public AdminDepartmentRestController(DepartmentService departmentService, UniqueValidator uniqueValidator) {
+        super(departmentService, uniqueValidator);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DepartmentDTO> createWithLocation(@RequestBody DepartmentDTO departmentDTO) {
+    public ResponseEntity<DepartmentDTO> createWithLocation(@RequestBody @Valid DepartmentDTO departmentDTO) {
         DepartmentDTO created = super.create(departmentDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -46,7 +48,7 @@ public class AdminDepartmentRestController extends AbstractDepartmentController 
     @Override
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody DepartmentDTO departmentDTO, @PathVariable("id") int departmentId) {
+    public void update(@RequestBody @Valid DepartmentDTO departmentDTO, @PathVariable("id") int departmentId) {
         super.update(departmentDTO, departmentId);
     }
 

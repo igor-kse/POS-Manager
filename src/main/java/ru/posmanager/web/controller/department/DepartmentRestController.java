@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.posmanager.service.bank.DepartmentService;
 import ru.posmanager.to.bank.DepartmentDTO;
+import ru.posmanager.web.validator.UniqueValidator;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ import java.util.List;
 public class DepartmentRestController extends AbstractDepartmentController {
     public static final String DEPARTMENT_REST_URL = "/api/departments/";
 
-    public DepartmentRestController(DepartmentService departmentService) {
-        super(departmentService);
+    public DepartmentRestController(DepartmentService departmentService, UniqueValidator uniqueValidator) {
+        super(departmentService, uniqueValidator);
     }
 
     @Override

@@ -2,11 +2,14 @@ package ru.posmanager.web.controller.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import ru.posmanager.service.user.UserService;
 import ru.posmanager.to.user.UserDTO;
 import ru.posmanager.to.user.UserPreviewDTO;
 import ru.posmanager.to.user.UserUpdateDTO;
 import ru.posmanager.util.CollectionUtil;
+import ru.posmanager.web.validator.UniqueValidator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +18,16 @@ import java.util.Map;
 public abstract class AbstractUserController {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final UserService userService;
+    private final UniqueValidator nameValidator;
 
-    public AbstractUserController(UserService userService) {
+    public AbstractUserController(UserService userService, UniqueValidator uniqueValidator) {
         this.userService = userService;
+        this.nameValidator = uniqueValidator;
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(nameValidator);
     }
 
     public UserDTO create(UserUpdateDTO dto) {

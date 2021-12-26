@@ -9,7 +9,9 @@ import ru.posmanager.service.user.UserService;
 import ru.posmanager.to.user.UserDTO;
 import ru.posmanager.to.user.UserPreviewDTO;
 import ru.posmanager.to.user.UserUpdateDTO;
+import ru.posmanager.web.validator.UniqueValidator;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +21,13 @@ import java.util.Map;
 public class AdminRestController extends AbstractUserController {
     public static final String ADMIN_REST_URL = "/api/admin/users/";
 
-    public AdminRestController(UserService userService) {
-        super(userService);
+    public AdminRestController(UserService userService, UniqueValidator uniqueValidator) {
+        super(userService, uniqueValidator);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<UserDTO> createWithLocation(@RequestBody UserUpdateDTO userUpdateDTO) {
+    public ResponseEntity<UserDTO> createWithLocation(@RequestBody @Valid UserUpdateDTO userUpdateDTO) {
         UserDTO created = super.create(userUpdateDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(ADMIN_REST_URL + "{id}")

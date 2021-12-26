@@ -8,6 +8,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.device.VendorService;
 import ru.posmanager.to.device.VendorDTO;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class AdminVendorRestController extends AbstractVendorController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VendorDTO> createWithLocation(@RequestBody VendorDTO vendorDTO) {
+    public ResponseEntity<VendorDTO> createWithLocation(@RequestBody @Valid VendorDTO vendorDTO) {
         VendorDTO created = super.create(vendorDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -52,7 +53,7 @@ public class AdminVendorRestController extends AbstractVendorController {
     @Override
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody VendorDTO dto, @PathVariable int id) {
+    public void update(@RequestBody @Valid VendorDTO dto, @PathVariable int id) {
         super.update(dto, id);
     }
 

@@ -9,6 +9,7 @@ import ru.posmanager.service.device.FirmwareService;
 import ru.posmanager.to.device.FirmwareDTO;
 import ru.posmanager.to.device.FirmwareUpdateDTO;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class AdminFirmwareRestController extends AbstractFirmwareController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FirmwareDTO> createWithLocation(@RequestBody FirmwareUpdateDTO firmwareUpdateDTO) {
+    public ResponseEntity<FirmwareDTO> createWithLocation(@RequestBody @Valid FirmwareUpdateDTO firmwareUpdateDTO) {
         FirmwareDTO created = super.create(firmwareUpdateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -47,7 +48,7 @@ public class AdminFirmwareRestController extends AbstractFirmwareController {
     @Override
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody FirmwareUpdateDTO firmwareUpdateDTO, @PathVariable("id") int firmwareId) {
+    public void update(@RequestBody @Valid FirmwareUpdateDTO firmwareUpdateDTO, @PathVariable("id") int firmwareId) {
         super.update(firmwareUpdateDTO, firmwareId);
     }
 

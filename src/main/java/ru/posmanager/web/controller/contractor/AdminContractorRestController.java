@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.bank.ContractorService;
 import ru.posmanager.to.bank.ContractorDTO;
+import ru.posmanager.web.validator.UniqueValidator;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -16,12 +18,12 @@ import java.util.List;
 public class AdminContractorRestController extends AbstractContractorController {
     public static final String CONTRACTOR_ADMIN_REST_URL = "/api/admin/contractors/";
 
-    public AdminContractorRestController(ContractorService contractorService) {
-        super(contractorService);
+    public AdminContractorRestController(ContractorService contractorService, UniqueValidator uniqueValidator) {
+        super(contractorService, uniqueValidator);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ContractorDTO> createWithLocation(@RequestBody ContractorDTO contractorDTO) {
+    public ResponseEntity<ContractorDTO> createWithLocation(@RequestBody @Valid ContractorDTO contractorDTO) {
         ContractorDTO created = super.create(contractorDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -46,7 +48,7 @@ public class AdminContractorRestController extends AbstractContractorController 
     @Override
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody ContractorDTO contractorDTO, @PathVariable("id") int contractorId) {
+    public void update(@RequestBody @Valid ContractorDTO contractorDTO, @PathVariable("id") int contractorId) {
         super.update(contractorDTO, contractorId);
     }
 

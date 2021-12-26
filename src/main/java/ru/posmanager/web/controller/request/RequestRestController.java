@@ -11,6 +11,7 @@ import ru.posmanager.to.request.RequestPreviewDTO;
 import ru.posmanager.to.request.RequestUpdateDTO;
 import ru.posmanager.web.security.AuthorizedUserExtractor;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class RequestRestController extends AbstractRequestController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RequestDTO> createWithLocation(@RequestBody RequestUpdateDTO requestUpdateDTO) {
+    public ResponseEntity<RequestDTO> createWithLocation(@RequestBody @Valid RequestUpdateDTO requestUpdateDTO) {
         int authorId = authorizedUserExtractor.authorizedUserId();
         requestUpdateDTO.setAuthorId(authorId);
         RequestDTO created = super.create(requestUpdateDTO);
@@ -57,7 +58,7 @@ public class RequestRestController extends AbstractRequestController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody RequestUpdateDTO requestUpdateDTO, @PathVariable("id") int requestId) {
+    public void update(@RequestBody @Valid RequestUpdateDTO requestUpdateDTO, @PathVariable("id") int requestId) {
         int userId = authorizedUserExtractor.authorizedUserId();
         RequestDTO request = super.get(requestId);
         if (userId == request.getAuthor().getId() || userId == request.getImplementor().getId()) {

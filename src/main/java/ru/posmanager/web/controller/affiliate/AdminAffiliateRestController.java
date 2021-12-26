@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.bank.AffiliateService;
 import ru.posmanager.to.bank.AffiliateDTO;
+import ru.posmanager.web.validator.UniqueValidator;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -19,12 +21,12 @@ public class AdminAffiliateRestController extends AbstractAffiliateController {
     public static final String AFFILIATE_ADMIN_REST_URL = "/api/admin/affiliates/";
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public AdminAffiliateRestController(AffiliateService affiliateService) {
-        super(affiliateService);
+    public AdminAffiliateRestController(AffiliateService affiliateService, UniqueValidator uniqueValidator) {
+        super(affiliateService, uniqueValidator);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AffiliateDTO> createWithLocation(@RequestBody AffiliateDTO affiliateDTO) {
+    public ResponseEntity<AffiliateDTO> createWithLocation(@RequestBody @Valid AffiliateDTO affiliateDTO) {
         AffiliateDTO created = super.create(affiliateDTO);
         log.info("Created affiliate {}", created);
 
@@ -47,7 +49,7 @@ public class AdminAffiliateRestController extends AbstractAffiliateController {
 
     @PutMapping("{affiliateId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody AffiliateDTO to, @PathVariable int affiliateId) {
+    public void update(@RequestBody @Valid AffiliateDTO to, @PathVariable int affiliateId) {
         super.update(to, affiliateId);
     }
 

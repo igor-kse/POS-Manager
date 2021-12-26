@@ -7,6 +7,7 @@ import ru.posmanager.service.user.UserService;
 import ru.posmanager.to.user.UserDTO;
 import ru.posmanager.to.user.UserPreviewDTO;
 import ru.posmanager.web.security.AuthorizedUserExtractor;
+import ru.posmanager.web.validator.UniqueValidator;
 
 import java.util.List;
 import java.util.Map;
@@ -18,8 +19,9 @@ public class UserRestController extends AbstractUserController {
 
     private final AuthorizedUserExtractor authorizedUserExtractor;
 
-    public UserRestController(UserService userService, AuthorizedUserExtractor authorizedUserExtractor) {
-        super(userService);
+    public UserRestController(UserService userService, UniqueValidator uniqueValidator,
+                              AuthorizedUserExtractor authorizedUserExtractor) {
+        super(userService, uniqueValidator);
         this.authorizedUserExtractor = authorizedUserExtractor;
     }
 

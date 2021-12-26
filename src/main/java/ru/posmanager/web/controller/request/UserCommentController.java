@@ -11,6 +11,7 @@ import ru.posmanager.service.request.UserCommentService;
 import ru.posmanager.to.request.UserCommentDTO;
 import ru.posmanager.to.request.UserCommentUpdateDTO;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class UserCommentController {
     }
 
     @PostMapping(value = "add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserCommentDTO> createWithLocation(@RequestBody UserCommentUpdateDTO userCommentUpdateDTO) {
+    public ResponseEntity<UserCommentDTO> createWithLocation(@RequestBody @Valid UserCommentUpdateDTO userCommentUpdateDTO) {
         log.info("creating UserComment from {}", userCommentUpdateDTO);
         UserCommentDTO created = userCommentService.create(userCommentUpdateDTO);
 
@@ -52,7 +53,7 @@ public class UserCommentController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody UserCommentUpdateDTO userCommentUpdateDTO, @PathVariable("id") int userCommentId) {
+    public void update(@RequestBody @Valid UserCommentUpdateDTO userCommentUpdateDTO, @PathVariable("id") int userCommentId) {
         log.info("updating UserComment {} with {}", userCommentId, userCommentUpdateDTO);
         userCommentService.update(userCommentUpdateDTO, userCommentId);
     }

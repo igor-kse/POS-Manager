@@ -9,6 +9,7 @@ import ru.posmanager.service.device.DeviceService;
 import ru.posmanager.to.device.DeviceDTO;
 import ru.posmanager.to.device.DeviceUpdateDTO;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class AdminDeviceRestController extends AbstractDeviceController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DeviceDTO> createWithLocation(@RequestBody DeviceUpdateDTO deviceUpdateDTO) {
+    public ResponseEntity<DeviceDTO> createWithLocation(@RequestBody @Valid DeviceUpdateDTO deviceUpdateDTO) {
         DeviceDTO created = super.create(deviceUpdateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -47,7 +48,7 @@ public class AdminDeviceRestController extends AbstractDeviceController {
     @Override
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody DeviceUpdateDTO deviceUpdateDTO, @PathVariable("id") int deviceId) {
+    public void update(@RequestBody @Valid DeviceUpdateDTO deviceUpdateDTO, @PathVariable("id") int deviceId) {
         super.update(deviceUpdateDTO, deviceId);
     }
 

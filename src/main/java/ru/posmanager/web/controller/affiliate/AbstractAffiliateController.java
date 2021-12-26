@@ -2,17 +2,27 @@ package ru.posmanager.web.controller.affiliate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import ru.posmanager.service.bank.AffiliateService;
 import ru.posmanager.to.bank.AffiliateDTO;
+import ru.posmanager.web.validator.UniqueValidator;
 
 import java.util.List;
 
 public abstract class AbstractAffiliateController {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final AffiliateService affiliateService;
+    private final UniqueValidator uniqueValidator;
 
-    public AbstractAffiliateController(AffiliateService affiliateService) {
+    public AbstractAffiliateController(AffiliateService affiliateService, UniqueValidator uniqueValidator) {
         this.affiliateService = affiliateService;
+        this.uniqueValidator = uniqueValidator;
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(uniqueValidator);
     }
 
     public AffiliateDTO create(AffiliateDTO dto) {

@@ -12,6 +12,8 @@ import ru.posmanager.service.user.UserService;
 import ru.posmanager.web.security.UserRequest;
 import ru.posmanager.web.security.UserResponse;
 
+import javax.validation.Valid;
+
 import static ru.posmanager.util.JsonWebTokenUtil.generateJsonWebToken;
 
 @RestController
@@ -27,7 +29,7 @@ public class AuthenticationRestController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserResponse> login(@RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> login(@RequestBody @Valid UserRequest request) {
         String username = request.getUsername();
         String password = request.getPassword();
 

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.posmanager.service.bank.ContractorService;
 import ru.posmanager.to.bank.ContractorDTO;
+import ru.posmanager.web.validator.UniqueValidator;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ import java.util.List;
 public class ContractorRestController extends AbstractContractorController {
     public static final String CONTRACTOR_REST_URL = "/api/contractors/";
 
-    public ContractorRestController(ContractorService contractorService) {
-        super(contractorService);
+    public ContractorRestController(ContractorService contractorService, UniqueValidator uniqueValidator) {
+        super(contractorService, uniqueValidator);
     }
 
     @Override
