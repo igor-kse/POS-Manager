@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.domain.bank.Department;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,7 +21,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     int delete(@Param("id") int id);
 
     @Query("SELECT d FROM Department d ORDER BY d.name")
-    List<Department> getAll();
+    Optional<List<Department>> getAll();
 
-    Department getByName(@Param("name") String name);
+    Optional<Department> getByName(@Param("name") String name);
 }

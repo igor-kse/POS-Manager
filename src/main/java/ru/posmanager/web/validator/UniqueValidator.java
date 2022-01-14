@@ -91,7 +91,7 @@ public class UniqueValidator implements org.springframework.validation.Validator
 
     private Map<DataType, Object> resolveType(Object target) {
         if (target instanceof DepartmentDTO departmentDTO) {
-            Department department = departmentRepository.getByName(departmentDTO.getName());
+            Department department = departmentRepository.getByName(departmentDTO.getName()).orElse(null);
             return getResolvedData("name", EXCEPTION_DUPLICATE_DEPARTMENT, department);
 
         } else if (target instanceof UserUpdateDTO userUpdateDTO) {

@@ -5,15 +5,15 @@ import org.springframework.stereotype.Component;
 import ru.posmanager.domain.bank.Department;
 import ru.posmanager.dto.bank.DepartmentDTO;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
 public class DepartmentMapper {
+    private final ModelMapper mapper = new ModelMapper();
 
-    private final ModelMapper mapper;
-
-    public DepartmentMapper() {
-        mapper = new ModelMapper();
+    @PostConstruct
+    public void setup() {
         mapper.createTypeMap(Department.class, DepartmentDTO.class);
     }
 
