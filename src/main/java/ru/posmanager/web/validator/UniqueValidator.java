@@ -109,7 +109,7 @@ public class UniqueValidator implements org.springframework.validation.Validator
             return getResolvedData("version", EXCEPTION_FIRMWARE_VERSION, firmware);
 
         } else if(target instanceof AffiliateDTO affiliateDTO) {
-            Affiliate affiliate = affiliateRepository.getByName(affiliateDTO.getName());
+            Affiliate affiliate = affiliateRepository.getByName(affiliateDTO.getName()).orElse(null);
             return getResolvedData("name", EXCEPTION_DUPLICATE_AFFILIATE, affiliate);
         } else {
             throw new IllegalStateException("Invalid target for Validator " + target.getClass());

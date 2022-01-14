@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.domain.bank.Affiliate;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,7 +21,7 @@ public interface AffiliateRepository extends JpaRepository<Affiliate, Integer> {
     int delete(@Param("id") int id);
 
     @Query("SELECT a FROM Affiliate a ORDER BY a.name")
-    List<Affiliate> getAll();
+    Optional<List<Affiliate>> getAll();
 
-    Affiliate getByName(@Param("name") String name);
+    Optional<Affiliate> getByName(@Param("name") String name);
 }

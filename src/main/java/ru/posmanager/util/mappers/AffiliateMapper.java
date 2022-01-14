@@ -5,15 +5,15 @@ import org.springframework.stereotype.Component;
 import ru.posmanager.domain.bank.Affiliate;
 import ru.posmanager.dto.bank.AffiliateDTO;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
 public class AffiliateMapper {
+    private final ModelMapper mapper = new ModelMapper();
 
-    private final ModelMapper mapper;
-
-    public AffiliateMapper() {
-        mapper = new ModelMapper();
+    @PostConstruct
+    public void setup() {
         mapper.createTypeMap(Affiliate.class, AffiliateDTO.class);
     }
 
