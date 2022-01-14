@@ -63,6 +63,7 @@ public class UniqueValidator implements org.springframework.validation.Validator
     public boolean supports(Class<?> clazz) {
         return HasIdAndName.class.isAssignableFrom(clazz)
                 || HasIdAndEmail.class.isAssignableFrom(clazz)
+                || Map.class.isAssignableFrom(clazz)
                 || clazz == FirmwareUpdateDTO.class;
     }
 
