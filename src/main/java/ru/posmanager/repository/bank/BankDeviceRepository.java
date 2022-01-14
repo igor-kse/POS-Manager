@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.domain.bank.BankDevice;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,8 +21,8 @@ public interface BankDeviceRepository extends JpaRepository<BankDevice, Integer>
     int delete(@Param("id") int id);
 
     @Query("SELECT b FROM BankDevice b ORDER BY b.affiliate.name, b.device.vendor.name, b.device.model")
-    List<BankDevice> getAll();
+    Optional<List<BankDevice>> getAll();
 
     @Query("SELECT b FROM BankDevice b WHERE b.tid LIKE :tid% AND b.address LIKE :address%")
-    List<BankDevice> getAllByTidAndAddress(@Param("tid") String tid, @Param("address") String address);
+    Optional<List<BankDevice>> getAllByTidAndAddress(@Param("tid") String tid, @Param("address") String address);
 }
