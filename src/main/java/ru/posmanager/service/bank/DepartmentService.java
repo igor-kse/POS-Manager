@@ -3,9 +3,9 @@ package ru.posmanager.service.bank;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.exception.NotFoundException;
-import ru.posmanager.model.bank.Department;
+import ru.posmanager.domain.bank.Department;
 import ru.posmanager.repository.bank.DepartmentRepository;
-import ru.posmanager.to.bank.DepartmentDTO;
+import ru.posmanager.dto.bank.DepartmentDTO;
 import ru.posmanager.util.mappers.DepartmentMapper;
 
 import java.util.Collections;

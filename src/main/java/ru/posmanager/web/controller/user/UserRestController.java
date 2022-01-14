@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.posmanager.service.user.UserService;
-import ru.posmanager.to.user.UserDTO;
-import ru.posmanager.to.user.UserPreviewDTO;
+import ru.posmanager.dto.user.UserDTO;
+import ru.posmanager.dto.user.UserPreviewDTO;
 import ru.posmanager.web.security.AuthorizedUserExtractor;
 import ru.posmanager.web.validator.UniqueValidator;
 

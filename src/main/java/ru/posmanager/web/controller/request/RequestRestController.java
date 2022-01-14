@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.request.RequestService;
-import ru.posmanager.to.request.RequestDTO;
-import ru.posmanager.to.request.RequestPreviewDTO;
-import ru.posmanager.to.request.RequestUpdateDTO;
+import ru.posmanager.dto.request.RequestDTO;
+import ru.posmanager.dto.request.RequestPreviewDTO;
+import ru.posmanager.dto.request.RequestUpdateDTO;
 import ru.posmanager.web.security.AuthorizedUserExtractor;
 
 import javax.validation.Valid;

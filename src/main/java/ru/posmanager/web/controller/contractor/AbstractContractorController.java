@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import ru.posmanager.service.bank.ContractorService;
-import ru.posmanager.to.bank.ContractorDTO;
+import ru.posmanager.dto.bank.ContractorDTO;
 import ru.posmanager.web.validator.UniqueValidator;
 
 import java.util.List;

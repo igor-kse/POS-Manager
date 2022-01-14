@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.AuthorizedUser;
 import ru.posmanager.exception.NotFoundException;
-import ru.posmanager.model.user.User;
+import ru.posmanager.domain.user.User;
 import ru.posmanager.repository.bank.DepartmentRepository;
 import ru.posmanager.repository.user.UserRepository;
-import ru.posmanager.to.user.UserDTO;
-import ru.posmanager.to.user.UserPreviewDTO;
-import ru.posmanager.to.user.UserUpdateDTO;
+import ru.posmanager.dto.user.UserDTO;
+import ru.posmanager.dto.user.UserPreviewDTO;
+import ru.posmanager.dto.user.UserUpdateDTO;
 import ru.posmanager.util.mappers.UserMapper;
 
 import java.util.Collections;
@@ -75,7 +75,7 @@ public class UserService implements AuthorizedUserDetailsService {
     public void update(Map<String, Object> patch, int id) {
         var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(User.class, id));
         updateFromForeignKeys(user, patch);
-        patch.computeIfPresent("password", (k, o) -> passwordEncoder.encode(k));
+        patch.computeIfPresent("password", (k, o) -> passwordEncoder.encode((String) o));
         userRepository.patch(patch, id);
     }
 

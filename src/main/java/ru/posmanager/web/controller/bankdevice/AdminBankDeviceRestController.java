@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.bank.BankDeviceService;
-import ru.posmanager.to.bank.BankDeviceDTO;
-import ru.posmanager.to.bank.BankDevicePreviewDTO;
-import ru.posmanager.to.bank.BankDeviceUpdateDTO;
+import ru.posmanager.dto.bank.BankDeviceDTO;
+import ru.posmanager.dto.bank.BankDevicePreviewDTO;
+import ru.posmanager.dto.bank.BankDeviceUpdateDTO;
 
 import javax.validation.Valid;
 import java.net.URI;

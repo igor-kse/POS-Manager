@@ -2,7 +2,7 @@ package ru.posmanager;
 
 import lombok.Getter;
 import lombok.ToString;
-import ru.posmanager.to.user.UserDTO;
+import ru.posmanager.dto.user.UserDTO;
 
 import java.io.Serial;
 

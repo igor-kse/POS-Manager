@@ -2,8 +2,8 @@ package ru.posmanager.util.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ru.posmanager.model.bank.Affiliate;
-import ru.posmanager.to.bank.AffiliateDTO;
+import ru.posmanager.domain.bank.Affiliate;
+import ru.posmanager.dto.bank.AffiliateDTO;
 
 import java.util.List;
 

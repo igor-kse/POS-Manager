@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.exception.NotFoundException;
-import ru.posmanager.model.user.User;
+import ru.posmanager.domain.user.User;
 
 import java.util.List;
 import java.util.Map;

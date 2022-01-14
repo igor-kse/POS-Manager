@@ -3,12 +3,12 @@ package ru.posmanager.util.mappers;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import ru.posmanager.AuthorizedUser;
-import ru.posmanager.model.bank.Department;
-import ru.posmanager.model.user.User;
-import ru.posmanager.to.bank.DepartmentDTO;
-import ru.posmanager.to.user.UserDTO;
-import ru.posmanager.to.user.UserPreviewDTO;
-import ru.posmanager.to.user.UserUpdateDTO;
+import ru.posmanager.domain.bank.Department;
+import ru.posmanager.domain.user.User;
+import ru.posmanager.dto.bank.DepartmentDTO;
+import ru.posmanager.dto.user.UserDTO;
+import ru.posmanager.dto.user.UserPreviewDTO;
+import ru.posmanager.dto.user.UserUpdateDTO;
 
 import java.util.List;
 

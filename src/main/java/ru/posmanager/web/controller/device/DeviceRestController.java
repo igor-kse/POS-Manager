@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.posmanager.service.device.DeviceService;
-import ru.posmanager.to.device.DeviceDTO;
+import ru.posmanager.dto.device.DeviceDTO;
 
 import java.util.List;
 

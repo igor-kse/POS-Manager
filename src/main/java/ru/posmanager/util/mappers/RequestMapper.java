@@ -2,17 +2,17 @@ package ru.posmanager.util.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ru.posmanager.model.bank.BankDevice;
-import ru.posmanager.model.device.DeviceType;
-import ru.posmanager.model.request.Request;
-import ru.posmanager.model.request.UserComment;
-import ru.posmanager.model.user.User;
-import ru.posmanager.to.bank.BankDeviceDTO;
-import ru.posmanager.to.request.RequestDTO;
-import ru.posmanager.to.request.RequestPreviewDTO;
-import ru.posmanager.to.request.RequestUpdateDTO;
-import ru.posmanager.to.request.UserCommentDTO;
-import ru.posmanager.to.user.UserPreviewDTO;
+import ru.posmanager.domain.bank.BankDevice;
+import ru.posmanager.domain.device.DeviceType;
+import ru.posmanager.domain.request.Request;
+import ru.posmanager.domain.request.UserComment;
+import ru.posmanager.domain.user.User;
+import ru.posmanager.dto.bank.BankDeviceDTO;
+import ru.posmanager.dto.request.RequestDTO;
+import ru.posmanager.dto.request.RequestPreviewDTO;
+import ru.posmanager.dto.request.RequestUpdateDTO;
+import ru.posmanager.dto.request.UserCommentDTO;
+import ru.posmanager.dto.user.UserPreviewDTO;
 
 import java.util.List;
 

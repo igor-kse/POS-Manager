@@ -3,9 +3,9 @@ package ru.posmanager.service.bank;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.exception.NotFoundException;
-import ru.posmanager.model.bank.Affiliate;
+import ru.posmanager.domain.bank.Affiliate;
 import ru.posmanager.repository.bank.AffiliateRepository;
-import ru.posmanager.to.bank.AffiliateDTO;
+import ru.posmanager.dto.bank.AffiliateDTO;
 import ru.posmanager.util.mappers.AffiliateMapper;
 
 import java.util.Collections;

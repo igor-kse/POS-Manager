@@ -2,9 +2,9 @@ package ru.posmanager.service.device;
 
 import org.springframework.stereotype.Service;
 import ru.posmanager.exception.NotFoundException;
-import ru.posmanager.model.device.Vendor;
+import ru.posmanager.domain.device.Vendor;
 import ru.posmanager.repository.device.VendorRepository;
-import ru.posmanager.to.device.VendorDTO;
+import ru.posmanager.dto.device.VendorDTO;
 import ru.posmanager.util.mappers.VendorMapper;
 
 import java.util.Collections;

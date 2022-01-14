@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.device.VendorService;
-import ru.posmanager.to.device.VendorDTO;
+import ru.posmanager.dto.device.VendorDTO;
 
 import javax.validation.Valid;
 import java.net.URI;

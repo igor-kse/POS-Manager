@@ -5,12 +5,12 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.exception.IllegalRequestDataException;
 import ru.posmanager.exception.NotFoundException;
 import ru.posmanager.exception.TimeExpiredException;
-import ru.posmanager.model.request.UserComment;
+import ru.posmanager.domain.request.UserComment;
 import ru.posmanager.repository.request.RequestRepository;
 import ru.posmanager.repository.request.UserCommentRepository;
 import ru.posmanager.repository.user.UserRepository;
-import ru.posmanager.to.request.UserCommentUpdateDTO;
-import ru.posmanager.to.request.UserCommentDTO;
+import ru.posmanager.dto.request.UserCommentUpdateDTO;
+import ru.posmanager.dto.request.UserCommentDTO;
 import ru.posmanager.util.mappers.UserCommentMapper;
 import ru.posmanager.web.security.AuthorizedUserExtractor;
 

@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.request.UserCommentService;
-import ru.posmanager.to.request.UserCommentDTO;
-import ru.posmanager.to.request.UserCommentUpdateDTO;
+import ru.posmanager.dto.request.UserCommentDTO;
+import ru.posmanager.dto.request.UserCommentUpdateDTO;
 
 import javax.validation.Valid;
 import java.net.URI;

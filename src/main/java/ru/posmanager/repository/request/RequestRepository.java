@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.posmanager.model.request.Request;
-import ru.posmanager.model.request.RequestStatus;
+import ru.posmanager.domain.request.Request;
+import ru.posmanager.domain.request.RequestStatus;
 
 import java.util.List;
 

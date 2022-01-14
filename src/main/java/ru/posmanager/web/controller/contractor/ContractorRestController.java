@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.posmanager.service.bank.ContractorService;
-import ru.posmanager.to.bank.ContractorDTO;
+import ru.posmanager.dto.bank.ContractorDTO;
 import ru.posmanager.web.validator.UniqueValidator;
 
 import java.util.List;

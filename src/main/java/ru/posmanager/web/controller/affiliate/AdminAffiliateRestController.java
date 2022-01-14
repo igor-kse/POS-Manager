@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.bank.AffiliateService;
-import ru.posmanager.to.bank.AffiliateDTO;
+import ru.posmanager.dto.bank.AffiliateDTO;
 import ru.posmanager.web.validator.UniqueValidator;
 
 import javax.validation.Valid;

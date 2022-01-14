@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.posmanager.AuthorizedUser;
-import ru.posmanager.model.user.Role;
+import ru.posmanager.domain.user.Role;
 import ru.posmanager.service.user.UserService;
 import ru.posmanager.web.security.UserRequest;
 import ru.posmanager.web.security.UserResponse;

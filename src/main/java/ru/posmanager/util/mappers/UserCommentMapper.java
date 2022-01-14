@@ -2,11 +2,11 @@ package ru.posmanager.util.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ru.posmanager.model.request.UserComment;
-import ru.posmanager.model.user.User;
-import ru.posmanager.to.request.UserCommentUpdateDTO;
-import ru.posmanager.to.request.UserCommentDTO;
-import ru.posmanager.to.user.UserPreviewDTO;
+import ru.posmanager.domain.request.UserComment;
+import ru.posmanager.domain.user.User;
+import ru.posmanager.dto.request.UserCommentUpdateDTO;
+import ru.posmanager.dto.request.UserCommentDTO;
+import ru.posmanager.dto.user.UserPreviewDTO;
 
 import java.util.List;
 

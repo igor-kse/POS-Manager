@@ -3,8 +3,8 @@ package ru.posmanager.web.controller.device;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.posmanager.service.device.DeviceService;
-import ru.posmanager.to.device.DeviceDTO;
-import ru.posmanager.to.device.DeviceUpdateDTO;
+import ru.posmanager.dto.device.DeviceDTO;
+import ru.posmanager.dto.device.DeviceUpdateDTO;
 
 import java.util.List;
 

@@ -3,11 +3,11 @@ package ru.posmanager.service.device;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.exception.NotFoundException;
-import ru.posmanager.model.device.Firmware;
+import ru.posmanager.domain.device.Firmware;
 import ru.posmanager.repository.device.FirmwareRepository;
 import ru.posmanager.repository.device.VendorRepository;
-import ru.posmanager.to.device.FirmwareDTO;
-import ru.posmanager.to.device.FirmwareUpdateDTO;
+import ru.posmanager.dto.device.FirmwareDTO;
+import ru.posmanager.dto.device.FirmwareUpdateDTO;
 import ru.posmanager.util.mappers.FirmwareMapper;
 
 import java.util.Collections;

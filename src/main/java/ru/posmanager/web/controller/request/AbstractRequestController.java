@@ -2,11 +2,11 @@ package ru.posmanager.web.controller.request;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.posmanager.model.request.RequestStatus;
+import ru.posmanager.domain.request.RequestStatus;
 import ru.posmanager.service.request.RequestService;
-import ru.posmanager.to.request.RequestDTO;
-import ru.posmanager.to.request.RequestPreviewDTO;
-import ru.posmanager.to.request.RequestUpdateDTO;
+import ru.posmanager.dto.request.RequestDTO;
+import ru.posmanager.dto.request.RequestPreviewDTO;
+import ru.posmanager.dto.request.RequestUpdateDTO;
 
 import java.util.List;
 

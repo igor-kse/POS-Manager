@@ -3,7 +3,7 @@ package ru.posmanager.web.controller.vendor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.posmanager.service.device.VendorService;
-import ru.posmanager.to.device.VendorDTO;
+import ru.posmanager.dto.device.VendorDTO;
 
 import java.util.List;
 

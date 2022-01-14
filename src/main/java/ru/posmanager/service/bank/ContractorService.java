@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.exception.NotFoundException;
-import ru.posmanager.model.bank.BankDevice;
-import ru.posmanager.model.bank.Contractor;
+import ru.posmanager.domain.bank.BankDevice;
+import ru.posmanager.domain.bank.Contractor;
 import ru.posmanager.repository.bank.ContractorRepository;
-import ru.posmanager.to.bank.ContractorDTO;
+import ru.posmanager.dto.bank.ContractorDTO;
 import ru.posmanager.util.mappers.ContractorMapper;
 
 import java.util.Collections;

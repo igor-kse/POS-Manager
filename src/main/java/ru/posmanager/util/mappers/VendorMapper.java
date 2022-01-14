@@ -2,8 +2,8 @@ package ru.posmanager.util.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ru.posmanager.model.device.Vendor;
-import ru.posmanager.to.device.VendorDTO;
+import ru.posmanager.domain.device.Vendor;
+import ru.posmanager.dto.device.VendorDTO;
 
 import java.util.List;
 

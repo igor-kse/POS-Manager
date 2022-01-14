@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import ru.posmanager.service.user.UserService;
-import ru.posmanager.to.user.UserDTO;
-import ru.posmanager.to.user.UserPreviewDTO;
-import ru.posmanager.to.user.UserUpdateDTO;
+import ru.posmanager.dto.user.UserDTO;
+import ru.posmanager.dto.user.UserPreviewDTO;
+import ru.posmanager.dto.user.UserUpdateDTO;
 import ru.posmanager.util.CollectionUtil;
 import ru.posmanager.web.validator.UniqueValidator;
 

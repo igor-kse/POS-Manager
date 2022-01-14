@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.user.UserService;
-import ru.posmanager.to.user.UserDTO;
-import ru.posmanager.to.user.UserPreviewDTO;
-import ru.posmanager.to.user.UserUpdateDTO;
+import ru.posmanager.dto.user.UserDTO;
+import ru.posmanager.dto.user.UserPreviewDTO;
+import ru.posmanager.dto.user.UserUpdateDTO;
 import ru.posmanager.web.validator.UniqueValidator;
 
 import javax.validation.Valid;

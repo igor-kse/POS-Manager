@@ -3,9 +3,9 @@ package ru.posmanager.web.controller.bankdevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.posmanager.service.bank.BankDeviceService;
-import ru.posmanager.to.bank.BankDeviceDTO;
-import ru.posmanager.to.bank.BankDevicePreviewDTO;
-import ru.posmanager.to.bank.BankDeviceUpdateDTO;
+import ru.posmanager.dto.bank.BankDeviceDTO;
+import ru.posmanager.dto.bank.BankDevicePreviewDTO;
+import ru.posmanager.dto.bank.BankDeviceUpdateDTO;
 
 import java.util.List;
 

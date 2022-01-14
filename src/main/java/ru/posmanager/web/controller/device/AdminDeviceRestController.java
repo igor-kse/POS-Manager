@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.device.DeviceService;
-import ru.posmanager.to.device.DeviceDTO;
-import ru.posmanager.to.device.DeviceUpdateDTO;
+import ru.posmanager.dto.device.DeviceDTO;
+import ru.posmanager.dto.device.DeviceUpdateDTO;
 
 import javax.validation.Valid;
 import java.net.URI;

@@ -2,9 +2,9 @@ package ru.posmanager.util.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ru.posmanager.model.device.Device;
-import ru.posmanager.to.device.DeviceDTO;
-import ru.posmanager.to.device.DeviceUpdateDTO;
+import ru.posmanager.domain.device.Device;
+import ru.posmanager.dto.device.DeviceDTO;
+import ru.posmanager.dto.device.DeviceUpdateDTO;
 
 import java.util.List;
 

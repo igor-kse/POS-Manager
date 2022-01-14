@@ -2,14 +2,14 @@ package ru.posmanager.util.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ru.posmanager.model.bank.Affiliate;
-import ru.posmanager.model.bank.BankDevice;
-import ru.posmanager.model.bank.Contractor;
-import ru.posmanager.model.device.Device;
-import ru.posmanager.model.device.Firmware;
-import ru.posmanager.to.bank.*;
-import ru.posmanager.to.device.DeviceDTO;
-import ru.posmanager.to.device.FirmwareDTO;
+import ru.posmanager.domain.bank.Affiliate;
+import ru.posmanager.domain.bank.BankDevice;
+import ru.posmanager.domain.bank.Contractor;
+import ru.posmanager.domain.device.Device;
+import ru.posmanager.domain.device.Firmware;
+import ru.posmanager.dto.bank.*;
+import ru.posmanager.dto.device.DeviceDTO;
+import ru.posmanager.dto.device.FirmwareDTO;
 
 import java.util.List;
 

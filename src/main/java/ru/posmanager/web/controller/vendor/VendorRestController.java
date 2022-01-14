@@ -3,7 +3,7 @@ package ru.posmanager.web.controller.vendor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.posmanager.service.device.VendorService;
-import ru.posmanager.to.device.VendorDTO;
+import ru.posmanager.dto.device.VendorDTO;
 
 import java.util.List;
 

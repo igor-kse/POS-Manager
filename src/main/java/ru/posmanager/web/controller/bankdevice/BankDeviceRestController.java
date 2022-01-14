@@ -3,8 +3,8 @@ package ru.posmanager.web.controller.bankdevice;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.posmanager.service.bank.BankDeviceService;
-import ru.posmanager.to.bank.BankDeviceDTO;
-import ru.posmanager.to.bank.BankDevicePreviewDTO;
+import ru.posmanager.dto.bank.BankDeviceDTO;
+import ru.posmanager.dto.bank.BankDevicePreviewDTO;
 
 import java.util.List;
 

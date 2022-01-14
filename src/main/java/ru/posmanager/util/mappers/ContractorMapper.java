@@ -2,8 +2,8 @@ package ru.posmanager.util.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ru.posmanager.model.bank.Contractor;
-import ru.posmanager.to.bank.ContractorDTO;
+import ru.posmanager.domain.bank.Contractor;
+import ru.posmanager.dto.bank.ContractorDTO;
 
 import java.util.List;
 

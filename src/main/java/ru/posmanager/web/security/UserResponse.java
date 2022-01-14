@@ -3,7 +3,7 @@ package ru.posmanager.web.security;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.posmanager.to.user.UserDTO;
+import ru.posmanager.dto.user.UserDTO;
 
 @Data
 @NoArgsConstructor

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.posmanager.service.bank.DepartmentService;
-import ru.posmanager.to.bank.DepartmentDTO;
+import ru.posmanager.dto.bank.DepartmentDTO;
 import ru.posmanager.web.validator.UniqueValidator;
 
 import javax.validation.Valid;
