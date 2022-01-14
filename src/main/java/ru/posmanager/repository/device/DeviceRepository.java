@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.domain.device.Device;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,5 +21,5 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
     int delete(@Param("id") int id);
 
     @Query("SELECT d FROM Device d ORDER BY d.deviceType, d.vendor.name, d.model")
-    List<Device> getAll();
+    Optional<List<Device>> getAll();
 }

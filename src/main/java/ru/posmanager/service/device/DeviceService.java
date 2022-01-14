@@ -1,60 +1,52 @@
 package ru.posmanager.service.device;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.posmanager.exception.NotFoundException;
 import ru.posmanager.domain.device.Device;
-import ru.posmanager.repository.device.DeviceRepository;
-import ru.posmanager.repository.device.VendorRepository;
 import ru.posmanager.dto.device.DeviceDTO;
 import ru.posmanager.dto.device.DeviceUpdateDTO;
+import ru.posmanager.exception.NotFoundException;
+import ru.posmanager.repository.device.DeviceRepository;
 import ru.posmanager.util.mappers.DeviceMapper;
 
-import java.util.Collections;
 import java.util.List;
 
 import static ru.posmanager.util.ValidationUtil.*;
 
+@Slf4j
 @Service
 public class DeviceService {
     private final DeviceRepository deviceRepository;
-    private final VendorRepository vendorRepository;
     private final DeviceMapper deviceMapper;
 
-    public DeviceService(DeviceRepository deviceRepository, VendorRepository vendorRepository, DeviceMapper deviceMapper) {
+    public DeviceService(DeviceRepository deviceRepository, DeviceMapper deviceMapper) {
         this.deviceRepository = deviceRepository;
-        this.vendorRepository = vendorRepository;
         this.deviceMapper = deviceMapper;
     }
 
     @Transactional
     public DeviceDTO create(DeviceUpdateDTO dto) {
         checkNew(dto);
-        var device = deviceMapper.toEntity(dto);
-        var vendor = vendorRepository.getById(dto.getVendorId());
-        device.setVendor(vendor);
-        device = deviceRepository.save(device);
-        return deviceMapper.toDTO(device);
+        Device saved = deviceRepository.save(deviceMapper.toEntity(dto));
+        return deviceMapper.toDTO(saved);
     }
 
     public DeviceDTO get(int id) {
-        var device = deviceRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(Device.class, id));
+        Device device = deviceRepository.findById(id).orElseThrow(() -> new NotFoundException(Device.class, id));
         return deviceMapper.toDTO(device);
     }
 
     public List<DeviceDTO> getAll() {
-        List<Device> devices = deviceRepository.getAll();
-        return devices != null ? deviceMapper.toDTO(devices) : Collections.emptyList();
+        List<Device> devices = deviceRepository.getAll().orElse(List.of());
+        return deviceMapper.toDTO(devices);
     }
 
     @Transactional
     public void update(DeviceUpdateDTO dto, int id) {
         assureIdConsistent(dto, id);
         deviceRepository.findById(id).orElseThrow(() -> new NotFoundException(Device.class, id));
-        var device = deviceMapper.toEntity(dto);
-        device.setVendor(vendorRepository.getById(dto.getVendorId()));
-        deviceRepository.save(device);
+        deviceRepository.save(deviceMapper.toEntity(dto));
     }
 
     public void delete(int id) {

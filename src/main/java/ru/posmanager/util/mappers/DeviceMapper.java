@@ -1,23 +1,37 @@
 package ru.posmanager.util.mappers;
 
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import ru.posmanager.domain.device.Device;
+import ru.posmanager.domain.device.Vendor;
 import ru.posmanager.dto.device.DeviceDTO;
 import ru.posmanager.dto.device.DeviceUpdateDTO;
+import ru.posmanager.repository.device.VendorRepository;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
 public class DeviceMapper {
+    private final ModelMapper mapper = new ModelMapper();
+    private final VendorRepository vendorRepository;
 
-    private final ModelMapper mapper;
+    public DeviceMapper(VendorRepository vendorRepository) {
+        this.vendorRepository = vendorRepository;
+    }
 
-    public DeviceMapper() {
-        mapper = new ModelMapper();
+    @PostConstruct
+    public void setup() {
+        Converter<DeviceUpdateDTO, Device> deviceUpdatePostConverter = ctx -> {
+            Vendor vendor = vendorRepository.getById(ctx.getSource().getVendorId());
+            ctx.getDestination().setVendor(vendor);
+            return ctx.getDestination();
+        };
         mapper.createTypeMap(Device.class, DeviceDTO.class);
-        mapper.createTypeMap(Device.class, DeviceUpdateDTO.class)
-                .addMappings(mapper -> mapper.map(s -> s.getVendor().getId(), DeviceUpdateDTO::setVendorId));
+        mapper.createTypeMap(DeviceUpdateDTO.class, Device.class)
+                .addMappings(m -> m.skip(Device::setVendor))
+                .setPostConverter(deviceUpdatePostConverter);
     }
 
     public Device toEntity(DeviceDTO dto) {
