@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.domain.device.Vendor;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,10 +21,8 @@ public interface VendorRepository extends JpaRepository<Vendor, Integer> {
     int delete(@Param("id") int id);
 
     @Query("SELECT v FROM Vendor v ORDER BY v.name")
-    List<Vendor> getAll();
+    Optional<List<Vendor>> getAll();
 
     @Query("SELECT v FROM Vendor v WHERE v.name LIKE :vendor_name%")
-    List<Vendor> getAllFilteredByName(@Param("vendor_name") String vendorName);
-
-    Vendor getByName(String name);
+    Optional<List<Vendor>> getAllFilteredByName(@Param("vendor_name") String vendorName);
 }

@@ -1,53 +1,54 @@
 package ru.posmanager.service.device;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.posmanager.exception.NotFoundException;
 import ru.posmanager.domain.device.Vendor;
-import ru.posmanager.repository.device.VendorRepository;
 import ru.posmanager.dto.device.VendorDTO;
+import ru.posmanager.exception.NotFoundException;
+import ru.posmanager.repository.device.VendorRepository;
 import ru.posmanager.util.mappers.VendorMapper;
 
-import java.util.Collections;
 import java.util.List;
 
-import static ru.posmanager.util.StringUtil.emptyStringIfNull;
+import static ru.posmanager.util.StringUtil.makeEmptyIfNull;
 import static ru.posmanager.util.ValidationUtil.*;
 
+@Slf4j
 @Service
 public class VendorService {
     private final VendorRepository repository;
-
-    private final VendorMapper vendorModelMapper;
+    private final VendorMapper vendorMapper;
 
     public VendorService(VendorRepository repository, VendorMapper vendorMapper) {
         this.repository = repository;
-        this.vendorModelMapper = vendorMapper;
+        this.vendorMapper = vendorMapper;
     }
 
-    public VendorDTO create(VendorDTO to) {
-        checkNew(to);
-        var vendor = repository.save(vendorModelMapper.toEntity(to));
-        return vendorModelMapper.toDTO(vendor);
+    public VendorDTO create(VendorDTO dto) {
+        checkNew(dto);
+        Vendor saved = repository.save(vendorMapper.toEntity(dto));
+        return vendorMapper.toDTO(saved);
     }
 
     public VendorDTO get(int id) {
-        var vendor = repository.findById(id).orElseThrow(() -> new NotFoundException(Vendor.class, id));
-        return vendorModelMapper.toDTO(vendor);
+        Vendor vendor = repository.findById(id).orElseThrow(() -> new NotFoundException(Vendor.class, id));
+        return vendorMapper.toDTO(vendor);
     }
 
     public List<VendorDTO> getAll() {
-        List<Vendor> vendors = repository.getAll();
-        return vendors != null ? vendorModelMapper.toDTO(vendors) : Collections.emptyList();
+        List<Vendor> vendors = repository.getAll().orElse(List.of());
+        return vendorMapper.toDTO(vendors);
     }
 
-    public List<VendorDTO> getAllVendorDTOFilteredByTitle(String name) {
-        List<Vendor> vendors = repository.getAllFilteredByName(emptyStringIfNull(name));
-        return vendors != null ? vendorModelMapper.toDTO(vendors) : Collections.emptyList();
+    public List<VendorDTO> getFilteredByTitle(String name) {
+        List<Vendor> vendors = repository.getAllFilteredByName(makeEmptyIfNull(name)).orElse(List.of());
+        return vendorMapper.toDTO(vendors);
     }
 
-    public void update(VendorDTO to, int id) {
-        assureIdConsistent(to, id);
-        repository.save(vendorModelMapper.toEntity(to));
+    public void update(VendorDTO dto, int id) {
+        assureIdConsistent(dto, id);
+        repository.findById(id).orElseThrow(() -> new NotFoundException(Vendor.class, id));
+        repository.save(vendorMapper.toEntity(dto));
     }
 
     public void delete(int id) {

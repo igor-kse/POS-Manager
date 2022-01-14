@@ -32,7 +32,7 @@ public abstract class AbstractVendorController {
 
     public List<VendorDTO> getAllFilteredByName(String name) {
         log.info("getting all Vendors filtered by name={}", name);
-        return vendorService.getAllVendorDTOFilteredByTitle(name);
+        return vendorService.getFilteredByTitle(name);
     }
 
     public void update(VendorDTO dto, int id) {

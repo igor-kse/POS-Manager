@@ -5,15 +5,15 @@ import org.springframework.stereotype.Component;
 import ru.posmanager.domain.device.Vendor;
 import ru.posmanager.dto.device.VendorDTO;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
 public class VendorMapper {
+    private final ModelMapper mapper = new ModelMapper();
 
-    private final ModelMapper mapper;
-
-    public VendorMapper() {
-        mapper = new ModelMapper();
+    @PostConstruct
+    public void setup() {
         mapper.createTypeMap(Vendor.class, VendorDTO.class);
     }
 
