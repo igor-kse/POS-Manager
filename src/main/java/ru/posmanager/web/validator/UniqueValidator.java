@@ -105,7 +105,7 @@ public class UniqueValidator implements org.springframework.validation.Validator
         } else if (target instanceof FirmwareUpdateDTO firmwareUpdateDTO) {
             int vendorId = firmwareUpdateDTO.getVendorId();
             String version = firmwareUpdateDTO.getVersion();
-            Firmware firmware = firmwareRepository.getByVendorAndVersion(vendorId, version);
+            Firmware firmware = firmwareRepository.getByVendorAndVersion(vendorId, version).orElse(null);
             return getResolvedData("version", EXCEPTION_FIRMWARE_VERSION, firmware);
 
         } else if(target instanceof AffiliateDTO affiliateDTO) {

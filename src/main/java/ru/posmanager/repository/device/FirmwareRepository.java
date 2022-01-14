@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.domain.device.Firmware;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,8 +21,8 @@ public interface FirmwareRepository extends JpaRepository<Firmware, Integer> {
     int delete(@Param("id") int id);
 
     @Query("SELECT f FROM Firmware f ORDER BY f.vendor.name, f.version")
-    List<Firmware> getAll();
+    Optional<List<Firmware>> getAll();
 
     @Query("SELECT f FROM Firmware f WHERE f.vendor.id = :vendor_id AND f.version = :version")
-    Firmware getByVendorAndVersion(@Param("vendor_id") int vendorId, @Param("version") String version);
+    Optional<Firmware> getByVendorAndVersion(@Param("vendor_id") int vendorId, @Param("version") String version);
 }
