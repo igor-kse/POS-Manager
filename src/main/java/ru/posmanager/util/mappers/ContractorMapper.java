@@ -5,15 +5,15 @@ import org.springframework.stereotype.Component;
 import ru.posmanager.domain.bank.Contractor;
 import ru.posmanager.dto.bank.ContractorDTO;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
 public class ContractorMapper {
+    private final ModelMapper mapper = new ModelMapper();
 
-    private final ModelMapper mapper;
-
-    public ContractorMapper() {
-        mapper = new ModelMapper();
+    @PostConstruct
+    public void setup() {
         mapper.createTypeMap(Contractor.class, ContractorDTO.class);
     }
 

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.domain.bank.Contractor;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,7 +21,7 @@ public interface ContractorRepository extends JpaRepository<Contractor, Integer>
     int delete(@Param("id") int id);
 
     @Query("SELECT c FROM Contractor c ORDER BY c.name")
-    List<Contractor> getAll();
+    Optional<List<Contractor>> getAll();
 
-    Contractor getByUnp(String unp);
+    Optional<Contractor> getByUnp(String unp);
 }

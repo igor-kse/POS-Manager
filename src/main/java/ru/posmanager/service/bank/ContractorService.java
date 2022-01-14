@@ -1,24 +1,22 @@
 package ru.posmanager.service.bank;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.posmanager.exception.NotFoundException;
 import ru.posmanager.domain.bank.BankDevice;
 import ru.posmanager.domain.bank.Contractor;
-import ru.posmanager.repository.bank.ContractorRepository;
 import ru.posmanager.dto.bank.ContractorDTO;
+import ru.posmanager.exception.NotFoundException;
+import ru.posmanager.repository.bank.ContractorRepository;
 import ru.posmanager.util.mappers.ContractorMapper;
 
-import java.util.Collections;
 import java.util.List;
 
 import static ru.posmanager.util.ValidationUtil.*;
 
+@Slf4j
 @Service
 public class ContractorService {
-    private final Logger log = LoggerFactory.getLogger(getClass());
     private final ContractorRepository repository;
     private final ContractorMapper contractorMapper;
 
@@ -27,28 +25,27 @@ public class ContractorService {
         this.contractorMapper = contractorMapper;
     }
 
-    public ContractorDTO create(ContractorDTO to) {
-        checkNew(to);
-        var contractor = repository.save(contractorMapper.toEntity(to));
-        return contractorMapper.toDTO(contractor);
+    public ContractorDTO create(ContractorDTO dto) {
+        checkNew(dto);
+        Contractor saved = repository.save(contractorMapper.toEntity(dto));
+        return contractorMapper.toDTO(saved);
     }
 
     public ContractorDTO get(int id) {
-        var contractor = repository.findById(id)
-                .orElseThrow(() -> new NotFoundException(Contractor.class, id));
+        Contractor contractor = repository.findById(id).orElseThrow(() -> new NotFoundException(Contractor.class, id));
         return contractorMapper.toDTO(contractor);
     }
 
     public List<ContractorDTO> getAll() {
-        List<Contractor> contractors = repository.getAll();
-        return contractors != null ? contractorMapper.toDTO(contractors) : Collections.emptyList();
+        List<Contractor> contractors = repository.getAll().orElse(List.of());
+        return contractorMapper.toDTO(contractors);
     }
 
     @Transactional
-    public void update(ContractorDTO to, int id) {
-        assureIdConsistent(to, id);
+    public void update(ContractorDTO dto, int id) {
+        assureIdConsistent(dto, id);
         repository.findById(id).orElseThrow(() -> new NotFoundException(Contractor.class, id));
-        repository.save(contractorMapper.toEntity(to));
+        repository.save(contractorMapper.toEntity(dto));
     }
 
     public void delete(int id) {
