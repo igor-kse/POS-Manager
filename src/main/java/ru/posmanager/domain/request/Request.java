@@ -20,7 +20,7 @@ import static java.util.Objects.isNull;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "request")

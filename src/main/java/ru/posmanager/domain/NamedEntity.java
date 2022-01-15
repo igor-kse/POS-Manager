@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @MappedSuperclass
 @Access(AccessType.FIELD)

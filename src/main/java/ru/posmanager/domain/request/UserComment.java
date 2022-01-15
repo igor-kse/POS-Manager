@@ -3,6 +3,7 @@ package ru.posmanager.domain.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import ru.posmanager.domain.BaseEntity;
 import ru.posmanager.domain.user.User;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString(callSuper = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "user_comment")
@@ -53,16 +55,5 @@ public class UserComment extends BaseEntity {
         this.user = user;
         this.content = content;
         this.created = created;
-    }
-
-    @Override
-    public String toString() {
-        return "UserComment{" +
-                "id=" + id +
-                ", request=" + request.getId() +
-                ", user=" + user.getId() +
-                ", content='" + content + '\'' +
-                ", created=" + created +
-                '}';
     }
 }
