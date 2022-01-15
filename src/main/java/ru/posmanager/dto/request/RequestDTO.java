@@ -1,10 +1,12 @@
 package ru.posmanager.dto.request;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.posmanager.domain.request.ImportanceType;
-import ru.posmanager.domain.request.RequestType;
 import ru.posmanager.domain.request.RequestStatus;
+import ru.posmanager.domain.request.RequestType;
 import ru.posmanager.dto.BaseDTO;
 import ru.posmanager.dto.bank.BankDevicePreviewDTO;
 import ru.posmanager.dto.user.UserPreviewDTO;
@@ -15,11 +17,12 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static java.util.Objects.isNull;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class RequestDTO extends BaseDTO {
 
@@ -50,7 +53,7 @@ public class RequestDTO extends BaseDTO {
 
     private UserPreviewDTO implementor;
 
-    private LocalDate created;
+    private LocalDate created = LocalDate.now();
 
     private LocalDate modified;
 
@@ -79,24 +82,5 @@ public class RequestDTO extends BaseDTO {
 
     public void setComments(List<UserCommentDTO> comments) {
         this.comments = isNull(comments) ? new ArrayList<>() : List.copyOf(comments);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        RequestDTO requestDTO = (RequestDTO) o;
-        return Objects.equals(title, requestDTO.title) && Objects.equals(description, requestDTO.description)
-                && Objects.equals(bankDevice, requestDTO.bankDevice) && requestType == requestDTO.requestType
-                && importanceType == requestDTO.importanceType && requestStatus == requestDTO.requestStatus
-                && Objects.equals(author, requestDTO.author) && Objects.equals(implementor, requestDTO.implementor)
-                && Objects.equals(created, requestDTO.created) && Objects.equals(modified, requestDTO.modified);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), title, description, bankDevice, requestType, importanceType, requestStatus,
-                author, implementor, created, modified);
     }
 }

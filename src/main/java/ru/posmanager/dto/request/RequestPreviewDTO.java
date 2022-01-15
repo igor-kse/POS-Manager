@@ -1,11 +1,13 @@
 package ru.posmanager.dto.request;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.posmanager.domain.device.DeviceType;
 import ru.posmanager.domain.request.ImportanceType;
-import ru.posmanager.domain.request.RequestType;
 import ru.posmanager.domain.request.RequestStatus;
+import ru.posmanager.domain.request.RequestType;
 import ru.posmanager.dto.BaseDTO;
 import ru.posmanager.dto.user.UserPreviewDTO;
 
@@ -13,9 +15,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class RequestPreviewDTO extends BaseDTO {
 
@@ -44,11 +47,6 @@ public class RequestPreviewDTO extends BaseDTO {
 
     private LocalDate created;
 
-    public RequestPreviewDTO(RequestPreviewDTO dto) {
-        this(dto.id, dto.title, dto.deviceType, dto.created, dto.requestType, dto.importanceType, dto.requestStatus,
-                dto.author, dto.implementor);
-    }
-
     public RequestPreviewDTO(Integer id, String title, DeviceType deviceType, LocalDate created,
                              RequestType requestType, ImportanceType importanceType, RequestStatus requestStatus,
                              UserPreviewDTO author, UserPreviewDTO implementor) {
@@ -61,23 +59,5 @@ public class RequestPreviewDTO extends BaseDTO {
         this.requestStatus = requestStatus;
         this.author = author;
         this.implementor = implementor;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        RequestPreviewDTO that = (RequestPreviewDTO) o;
-        return Objects.equals(title, that.title) && deviceType == that.deviceType && Objects.equals(created, that.created)
-                && requestType == that.requestType && importanceType == that.importanceType
-                && requestStatus == that.requestStatus && Objects.equals(author, that.author)
-                && Objects.equals(implementor, that.implementor);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), title, deviceType, created, requestType, importanceType, requestStatus,
-                author, implementor);
     }
 }

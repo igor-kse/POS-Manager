@@ -1,8 +1,6 @@
 package ru.posmanager.dto.user;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.util.Assert;
 import ru.posmanager.HasIdAndEmail;
 import ru.posmanager.domain.user.Role;
@@ -15,8 +13,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
 
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class UserDTO extends BaseDTO implements HasIdAndEmail {
 
@@ -87,23 +86,5 @@ public class UserDTO extends BaseDTO implements HasIdAndEmail {
         this.enabled = enabled;
         this.registered = registered;
         setRoles(roles);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        UserDTO userDTO = (UserDTO) o;
-        return enabled == userDTO.enabled
-                && Objects.equals(department, userDTO.department) && Objects.equals(email, userDTO.email)
-                && Objects.equals(password, userDTO.password) && Objects.equals(registered, userDTO.registered)
-                && Objects.equals(roles, userDTO.roles);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, middleName, city, department, email, password,
-                enabled, registered, roles);
     }
 }

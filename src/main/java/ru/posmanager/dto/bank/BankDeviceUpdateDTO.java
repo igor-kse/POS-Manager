@@ -1,21 +1,26 @@
 package ru.posmanager.dto.bank;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.posmanager.dto.BaseDTO;
 
 import javax.persistence.Column;
-import javax.validation.constraints.*;
-import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class BankDeviceUpdateDTO extends BaseDTO {
 
     @NotNull
     @NotBlank
     @Size(min = 8, max = 8)
-    @Column(name = "tid")
     private String tid;
 
     @NotNull
@@ -49,20 +54,5 @@ public class BankDeviceUpdateDTO extends BaseDTO {
         this.deviceId = deviceId;
         this.firmwareId = firmwareId;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        BankDeviceUpdateDTO that = (BankDeviceUpdateDTO) o;
-        return Objects.equals(tid, that.tid) && Objects.equals(address, that.address)
-                && Objects.equals(contractorId, that.contractorId) && Objects.equals(affiliateId, that.affiliateId)
-                && Objects.equals(deviceId, that.deviceId) && Objects.equals(firmwareId, that.firmwareId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), tid, address, contractorId, affiliateId, deviceId, firmwareId);
-    }
 }
+

@@ -1,7 +1,9 @@
 package ru.posmanager.dto.user;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.posmanager.HasIdAndEmail;
 import ru.posmanager.dto.BaseDTO;
 import ru.posmanager.dto.bank.DepartmentDTO;
@@ -10,9 +12,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class UserPreviewDTO extends BaseDTO implements HasIdAndEmail {
 
@@ -62,19 +65,5 @@ public class UserPreviewDTO extends BaseDTO implements HasIdAndEmail {
         this.city = city;
         this.email = email;
         this.department = department;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        UserPreviewDTO that = (UserPreviewDTO) o;
-        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(middleName, that.middleName) && Objects.equals(city, that.city) && Objects.equals(department, that.department) && Objects.equals(email, that.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, middleName, city, department, email);
     }
 }

@@ -1,15 +1,15 @@
 package ru.posmanager.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 import ru.posmanager.HasId;
 
-import java.util.Objects;
-
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode
+@ToString
 @NoArgsConstructor
 public abstract class BaseDTO implements HasId {
 
@@ -22,25 +22,5 @@ public abstract class BaseDTO implements HasId {
     @JsonIgnore
     public boolean isNew() {
         return this.id == null;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BaseDTO that = (BaseDTO) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "id=" + id +
-                '}';
     }
 }

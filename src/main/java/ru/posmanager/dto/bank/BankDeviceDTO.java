@@ -1,7 +1,9 @@
 package ru.posmanager.dto.bank;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.posmanager.dto.BaseDTO;
 import ru.posmanager.dto.device.DeviceDTO;
 import ru.posmanager.dto.device.FirmwareDTO;
@@ -10,9 +12,10 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class BankDeviceDTO extends BaseDTO {
 
@@ -48,21 +51,5 @@ public class BankDeviceDTO extends BaseDTO {
         this.affiliate = affiliate;
         this.device = device;
         this.firmware = firmware;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        BankDeviceDTO that = (BankDeviceDTO) o;
-        return Objects.equals(tid, that.tid) && Objects.equals(contractor, that.contractor)
-                && Objects.equals(address, that.address) && Objects.equals(affiliate, that.affiliate)
-                && Objects.equals(device, that.device);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), tid, contractor, address, affiliate, device);
     }
 }

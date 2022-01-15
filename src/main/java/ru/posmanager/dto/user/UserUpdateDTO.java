@@ -1,7 +1,9 @@
 package ru.posmanager.dto.user;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.util.Assert;
 import ru.posmanager.HasIdAndEmail;
 import ru.posmanager.domain.user.Role;
@@ -11,6 +13,8 @@ import javax.validation.constraints.*;
 import java.util.*;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class UserUpdateDTO extends BaseDTO implements HasIdAndEmail {
 
@@ -63,11 +67,6 @@ public class UserUpdateDTO extends BaseDTO implements HasIdAndEmail {
         this.roles.addAll(roles);
     }
 
-    public UserUpdateDTO(UserUpdateDTO u) {
-        this(u.id, u.firstName, u.lastName, u.middleName, u.city, u.departmentId, u.email, u.password,
-                u.enabled, u.registered, u.roles);
-    }
-
     public UserUpdateDTO(Integer id, String firstName, String lastName, String middleName, String city,
                          Integer departmentId, String email, String password, boolean enabled,
                          Date registered, Set<Role> roles) {
@@ -82,41 +81,5 @@ public class UserUpdateDTO extends BaseDTO implements HasIdAndEmail {
         this.enabled = enabled;
         this.registered = registered;
         setRoles(roles);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        UserUpdateDTO that = (UserUpdateDTO) o;
-        return enabled == that.enabled && Objects.equals(firstName, that.firstName)
-                && Objects.equals(lastName, that.lastName) && Objects.equals(middleName, that.middleName)
-                && Objects.equals(city, that.city) && Objects.equals(departmentId, that.departmentId)
-                && Objects.equals(email, that.email) && Objects.equals(password, that.password)
-                && Objects.equals(registered, that.registered) && Objects.equals(roles, that.roles);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, middleName, city, departmentId, email, password,
-                enabled, registered, roles);
-    }
-
-    @Override
-    public String toString() {
-        return "UserUpdateDTO{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", city='" + city + '\'' +
-                ", departmentId=" + departmentId +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", enabled=" + enabled +
-                ", registered=" + registered +
-                ", roles=" + roles +
-                '}';
     }
 }
