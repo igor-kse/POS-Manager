@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import ru.posmanager.domain.BaseEntity;
 import ru.posmanager.domain.bank.BankDevice;
 import ru.posmanager.domain.user.User;
@@ -42,6 +44,7 @@ public class Request extends BaseEntity {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "bank_device_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private BankDevice bankDevice;
 
     @Column(name = "request_type")
