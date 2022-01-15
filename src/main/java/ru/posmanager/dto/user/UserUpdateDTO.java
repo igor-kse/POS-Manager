@@ -8,6 +8,9 @@ import org.springframework.util.Assert;
 import ru.posmanager.HasIdAndEmail;
 import ru.posmanager.domain.user.Role;
 import ru.posmanager.dto.BaseDTO;
+import ru.posmanager.web.validator.UniqueDTO;
+import ru.posmanager.web.validator.UniqueDataResolver;
+import ru.posmanager.web.validator.UniqueDataType;
 
 import javax.validation.constraints.*;
 import java.util.*;
@@ -16,7 +19,7 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
-public class UserUpdateDTO extends BaseDTO implements HasIdAndEmail {
+public class UserUpdateDTO extends BaseDTO implements HasIdAndEmail, UniqueDTO {
 
     @NotNull
     @NotBlank
@@ -81,5 +84,10 @@ public class UserUpdateDTO extends BaseDTO implements HasIdAndEmail {
         this.enabled = enabled;
         this.registered = registered;
         setRoles(roles);
+    }
+
+    @Override
+    public Map<UniqueDataType, Object> resolveType() {
+        return UniqueDataResolver.resolve(this);
     }
 }
