@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @UtilityClass
 public class StringUtil {
-    public static String makeEmptyIfNull(String string) {
+    public static String getEmptyIfNull(String string) {
         return Objects.isNull(string) ? "" : string;
     }
 }

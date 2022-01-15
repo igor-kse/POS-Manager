@@ -13,7 +13,7 @@ import ru.posmanager.util.mappers.RequestMapper;
 
 import java.util.List;
 
-import static ru.posmanager.util.StringUtil.makeEmptyIfNull;
+import static ru.posmanager.util.StringUtil.getEmptyIfNull;
 import static ru.posmanager.util.ValidationUtil.*;
 
 @Service
@@ -49,7 +49,7 @@ public class RequestService {
     }
 
     public List<RequestPreviewDTO> getAllFiltered(String title, RequestStatus requestStatus) {
-        String safeTitle = makeEmptyIfNull(title);
+        String safeTitle = getEmptyIfNull(title);
         List<Request> requests = (requestStatus == null)
                 ? requestRepository.getAllFiltered(safeTitle).orElse(List.of())
                 : requestRepository.getAllFilteredWithStatus(safeTitle, requestStatus).orElse(List.of());

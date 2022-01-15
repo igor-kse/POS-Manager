@@ -13,7 +13,7 @@ import ru.posmanager.util.mappers.BankDeviceMapper;
 
 import java.util.List;
 
-import static ru.posmanager.util.StringUtil.makeEmptyIfNull;
+import static ru.posmanager.util.StringUtil.getEmptyIfNull;
 import static ru.posmanager.util.ValidationUtil.*;
 
 @Slf4j
@@ -52,7 +52,7 @@ public class BankDeviceService {
     }
 
     public List<BankDevicePreviewDTO> getAllByTidAndAddress(String tid, String address) {
-        List<BankDevice> bankDevices = repository.getAllByTidAndAddress(makeEmptyIfNull(tid), makeEmptyIfNull(address))
+        List<BankDevice> bankDevices = repository.getAllByTidAndAddress(getEmptyIfNull(tid), getEmptyIfNull(address))
                 .orElse(List.of());
         return bankDeviceMapper.toPreviewDTO(bankDevices);
     }

@@ -10,7 +10,7 @@ import ru.posmanager.util.mappers.VendorMapper;
 
 import java.util.List;
 
-import static ru.posmanager.util.StringUtil.makeEmptyIfNull;
+import static ru.posmanager.util.StringUtil.getEmptyIfNull;
 import static ru.posmanager.util.ValidationUtil.*;
 
 @Slf4j
@@ -41,7 +41,7 @@ public class VendorService {
     }
 
     public List<VendorDTO> getFilteredByTitle(String name) {
-        List<Vendor> vendors = repository.getAllFilteredByName(makeEmptyIfNull(name)).orElse(List.of());
+        List<Vendor> vendors = repository.getAllFilteredByName(getEmptyIfNull(name)).orElse(List.of());
         return vendorMapper.toDTO(vendors);
     }
 
