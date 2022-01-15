@@ -14,11 +14,11 @@ import ru.posmanager.dto.user.UserPreviewDTO;
 import ru.posmanager.dto.user.UserUpdateDTO;
 import ru.posmanager.util.mappers.UserMapper;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ru.posmanager.util.StringUtil.emptyStringIfNull;
+import static ru.posmanager.util.StringUtil.getEmptyIfNull;
 import static ru.posmanager.util.ValidationUtil.checkNew;
 import static ru.posmanager.util.ValidationUtil.checkNotFoundWithId;
 
@@ -39,44 +39,36 @@ public class UserService implements AuthorizedUserDetailsService {
 
     public UserDTO create(UserUpdateDTO dto) {
         checkNew(dto);
-        var user = getEntityFromUpdateDTO(dto);
-        user = userRepository.save(user);
-        return userMapper.toDTO(user);
+        User saved = userRepository.save(userMapper.toEntity(dto));
+        return userMapper.toDTO(saved);
     }
 
     public UserDTO get(int id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(User.class, id));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(User.class, id));
         return userMapper.toDTO(user);
     }
 
-    public UserPreviewDTO getUserPreviewDTO(int id) {
-        var user = get(id);
-        return userMapper.toUserPreviewDTO(user);
-    }
-
     public List<UserDTO> getAll() {
-        List<User> users = userRepository.getAll();
-        return users != null ? userMapper.toDTO(users) : Collections.emptyList();
+        List<User> users = userRepository.getAll().orElse(List.of());
+        return userMapper.toDTO(users);
     }
 
     public List<UserPreviewDTO> getAllUserPreviewDTO() {
-        List<User> users = userRepository.getAll();
-        return users != null ? userMapper.toUserPreviewDTO(users) : Collections.emptyList();
+        List<User> users = userRepository.getAll().orElse(List.of());
+        return userMapper.toUserPreviewDTO(users);
     }
 
     public List<UserPreviewDTO> getAllFilteredUserPreviewDTO(String lastName, String firstName, String middleName) {
-        List<User> users = userRepository.getAllFilteredByName(
-                emptyStringIfNull(lastName), emptyStringIfNull(firstName), emptyStringIfNull(middleName)
-        );
-        return users != null ? userMapper.toUserPreviewDTO(users) : Collections.emptyList();
+        List<User> users = userRepository
+                .getAllFiltered(getEmptyIfNull(lastName), getEmptyIfNull(firstName), getEmptyIfNull(middleName))
+                .orElse(List.of());
+        return userMapper.toUserPreviewDTO(users);
     }
 
     @Transactional
     public void update(Map<String, Object> patch, int id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(User.class, id));
-        updateFromForeignKeys(user, patch);
-        patch.computeIfPresent("password", (k, o) -> passwordEncoder.encode((String) o));
-        userRepository.patch(patch, id);
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(User.class, id));
+        userRepository.patch(updateFromForeignKeys(user, patch), id);
     }
 
     public void delete(int id) {
@@ -85,28 +77,21 @@ public class UserService implements AuthorizedUserDetailsService {
 
     @Override
     public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.getByEmail(email);
+        User user = userRepository.getByEmail(email).orElse(null);
         if (user == null) {
             throw new UsernameNotFoundException("User " + email + " is not found");
         }
         return new AuthorizedUser(userMapper.toDTO(user));
     }
 
-    private User getEntityFromUpdateDTO(UserUpdateDTO dto) {
-        var user = userMapper.toEntity(dto);
-        var department = departmentRepository.getById(dto.getDepartmentId());
-        user.setDepartment(department);
-        user.setRegistered(null);
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        return user;
-    }
-
-    private void updateFromForeignKeys(User user, Map<String, Object> patch) {
-        if (patch.containsKey("departmentId")) {
+    private Map<String, Object> updateFromForeignKeys(User user, Map<String, Object> patch) {
+        Map<String, Object> updatePatch = new HashMap<>(patch);
+        if (updatePatch.containsKey("departmentId")) {
             Integer departmentId = (Integer) patch.get("departmentId");
-            var department = departmentRepository.getById(departmentId);
-            user.setDepartment(department);
+            user.setDepartment(departmentRepository.getById(departmentId));
             patch.remove("departmentId");
         }
+        updatePatch.computeIfPresent("password", (k, o) -> passwordEncoder.encode((String) o));
+        return updatePatch;
     }
 }

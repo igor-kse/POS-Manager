@@ -95,7 +95,7 @@ public class UniqueValidator implements org.springframework.validation.Validator
             return getResolvedData("name", EXCEPTION_DUPLICATE_DEPARTMENT, department);
 
         } else if (target instanceof UserUpdateDTO userUpdateDTO) {
-            User user = userRepository.getByEmail(userUpdateDTO.getEmail());
+            User user = userRepository.getByEmail(userUpdateDTO.getEmail()).orElse(null);
             return getResolvedData("email", EXCEPTION_DUPLICATE_EMAIL, user);
 
         } else if (target instanceof ContractorDTO contractorDTO) {
