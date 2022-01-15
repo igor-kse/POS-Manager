@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.posmanager.domain.request.UserComment;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,5 +21,5 @@ public interface UserCommentRepository extends JpaRepository<UserComment, Intege
     int delete(@Param("id") int id);
 
     @Query("SELECT u FROM UserComment u WHERE u.request.id = :request_id ORDER BY u.created")
-    List<UserComment> getAll(@Param("request_id") int requestId);
+    Optional<List<UserComment>> getAll(@Param("request_id") int requestId);
 }

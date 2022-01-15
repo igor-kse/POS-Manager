@@ -10,6 +10,7 @@ import ru.posmanager.domain.request.Request;
 import ru.posmanager.domain.request.RequestStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -21,11 +22,11 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     int delete(@Param("id") int id);
 
     @Query("SELECT r FROM Request r ORDER BY r.created DESC, r.modified DESC")
-    List<Request> getAll();
+    Optional<List<Request>> getAll();
 
     @Query("SELECT r FROM Request r WHERE r.title LIKE :title% ORDER BY r.created DESC")
-    List<Request> getAllFiltered(@Param("title") String title);
+    Optional<List<Request>> getAllFiltered(@Param("title") String title);
 
     @Query("SELECT r FROM Request r WHERE r.title LIKE :title% AND r.requestStatus = :request_status ORDER BY r.created DESC")
-    List<Request> getAllFilteredWithStatus(@Param("title") String title, @Param("request_status") RequestStatus requestStatus);
+    Optional<List<Request>> getAllFilteredWithStatus(@Param("title") String title, @Param("request_status") RequestStatus requestStatus);
 }
